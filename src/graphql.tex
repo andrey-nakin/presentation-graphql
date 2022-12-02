@@ -1,17 +1,20 @@
 \documentclass{beamer}
 
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+%\usepackage[T2A]{fontenc}
 \usepackage[russian]{babel}
 
+%\usefonttheme{professionalfonts} % using non standard fonts for beamer
+
 % Theme choice:
-\usetheme{CambridgeUS}
+\usetheme{metropolis} 
+%\usetheme{CambridgeUS}
+%\setsansfont{Ubuntu}
 
 % Title page details: 
 \title{Введение в GraphQL} 
 \author{Андрей Накин}
 \date{\today}
-
 
 \begin{document}
 
@@ -21,7 +24,7 @@
 \end{frame}
 
 % Remove logo from the next slides
-\logo{}
+%\logo{}
 
 
 % Outline frame
@@ -31,14 +34,14 @@
 
 
 % Lists frame
-\section{Lists in Beamer}
-\begin{frame}{Lists in Beamer}
+\section{Списки в Beamer}
+\begin{frame}{Списки в Beamer}
 
-This is an unordered list:
+Это неупорядоченный список:
 \begin{itemize}
-    \item Item 1
-    \item Item 2
-    \item Item 3
+    \item Пункт 1
+    \item Пункт 2
+    \item Пункт 3
 \end{itemize}
 
 and this is an ordered list:
@@ -50,6 +53,22 @@ and this is an ordered list:
 
 \end{frame}
 
+
+
+\begin{frame}[fragile]{Code samples}
+
+\begin{verbatim}
+
+{
+  "id": "f50c1521-1a12-474e-8ff0-4ae288748eba",
+  "givenName": "Илья",
+  "patronymName": "Ильич",
+  "familyName": "Обломов"
+}
+  
+\end{verbatim}
+
+\end{frame}
 
 % Blocks frame
 \section{Blocks in Beamer}

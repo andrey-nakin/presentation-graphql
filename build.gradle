@@ -1,0 +1,29 @@
+ext {
+    dockerImageName = "texlive:latest"
+}
+
+task buildImage(type: Exec) {
+    executable "docker"
+    args = [
+    	"build",
+        "-f", "${project.projectDir}/Dockerfile",
+        "-t", dockerImageName,
+        project.projectDir
+    ]
+}
+
+task buildDoc(type: Exec) {
+    dependsOn tasks.buildImage
+    executable "docker"
+    args = [
+    	"run",
+        "--rm",
+        "-v", "${project.projectDir}/src:/app",
+        dockerImageName,
+        "pdflatex", "graphql.tex"
+    ]
+}
+
+task build {
+    dependsOn tasks.buildDoc
+}
