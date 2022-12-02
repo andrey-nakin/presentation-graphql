@@ -20,7 +20,8 @@ task buildDoc(type: Exec) {
         "--rm",
         "-v", "${project.projectDir}/src:/app",
         dockerImageName,
-        "pdflatex", "graphql.tex"
+        "xelatex", "graphql.tex"
+//        "pdflatex", "graphql.tex"
     ]
 }
 
