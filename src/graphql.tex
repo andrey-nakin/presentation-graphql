@@ -1,19 +1,17 @@
 \documentclass{beamer}
 
-%\usepackage[utf8]{inputenc}
-%\usepackage[T2A]{fontenc}
-
-\usefonttheme{professionalfonts} % using non standard fonts for beamer
-\usefonttheme{serif} % default family is serif
-\usepackage{fontspec}
-\setmainfont{Lato}
+%\usefonttheme{professionalfonts} % using non standard fonts for beamer
+%\usefonttheme{serif} % default family is serif
+%\usepackage{fontspec}
+%\setmainfont{Lato}
 
 \usepackage[russian]{babel}
 
-%\usefonttheme{professionalfonts} % using non standard fonts for beamer
-
 % Theme choice:
 \usetheme{metropolis} 
+\setsansfont{Lato}
+\setmonofont{FreeMono}
+
 %\usetheme{CambridgeUS}
 
 % Title page details: 
@@ -59,18 +57,39 @@ and this is an ordered list:
 \end{frame}
 
 
+\begin{frame}[fragile]{API сотрудников}
+\begin{verbatim}
+curl https://my-api.io/employees/emp-1
+\end{verbatim}
 
-\begin{frame}[fragile]{Code samples}
+Ответ:
 
 \begin{verbatim}
-
 {
-  "id": "f50c1521-1a12-474e-8ff0-4ae288748eba",
-  "givenName": "Илья",
-  "patronymName": "Ильич",
-  "familyName": "Обломов"
+  "id":            "emp-1",
+  "given":         "Илья",
+  "patronym":      "Ильич",
+  "family":        "Обломов",
+  "department_id": "dep-1",
+  "photo":         "/9j/4AAQSkZJRgABAQAA..."
 }
-  
+ 
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{API отделов}
+\begin{verbatim}
+curl https://my-api.io/departments/dep-1
+\end{verbatim}
+
+Ответ:
+
+\begin{verbatim}
+{
+  "id":   "dep-1",
+  "name": "Производственный"
+}
 \end{verbatim}
 
 \end{frame}
