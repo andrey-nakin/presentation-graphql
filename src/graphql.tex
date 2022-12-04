@@ -7,10 +7,30 @@
 
 \usepackage[russian]{babel}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+%  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  frame=single,
+}
+
 % Theme choice:
 \usetheme{metropolis} 
 \setsansfont{Lato}
 \setmonofont{FreeMono}
+%\usepackage[sfdefault]{biolinum}
 
 %\usetheme{CambridgeUS}
 
@@ -35,6 +55,25 @@
     \tableofcontents
 \end{frame}
 
+
+\section{{\tt ZonedDateTime}}
+
+\begin{frame}[fragile]{{\tt ZonedDateTime}}
+
+{\tt ZonedDateTime} учитывает исторические изменения характеристик временной зоны:
+\bigskip
+
+\begin{lstlisting}[language=java]
+ZoneId tz = ZoneId.of("Europe/Moscow");
+ZonedDateTime ztd = ZonedDateTime.of(
+  LocalDateTime.parse("2022-01-01T01:00:00"), tz);
+
+out.println(ztd.withYear(2011).getOffset()); // +03:00
+out.println(ztd.withYear(2014).getOffset()); // +04:00
+out.println(ztd.withYear(2015).getOffset()); // +03:00
+\end{lstlisting}
+
+\end{frame}
 
 % Lists frame
 \section{Списки в Beamer}
