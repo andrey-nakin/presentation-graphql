@@ -58,6 +58,20 @@
     \tableofcontents
 \end{frame}
 
+\begin{frame}{{\tt java.time}}
+
+Пакет {\tt java.time} (первый выпуск в 2014~году):
+
+\begin{itemize}
+    \item Более удобное API.
+    \item Иммутабельные классы.
+    \item Новые типы для неполной спецификации времени ({\tt LocalTime}, {\tt LocalDate} и~др.).
+    \item API для работы с временными промежутками ({\tt Duration}, {\tt Period}).
+    \item Управление системным временем ({\tt Clock}, удобно в~тестах).
+    \item Удалена поддержка Юлианского календаря~:(
+\end{itemize}
+
+\end{frame}
 
 \section{{\tt ZonedDateTime}}
 
@@ -76,7 +90,17 @@ out.println(ztd.withYear(2014).getOffset()); // +04:00
 out.println(ztd.withYear(2015).getOffset()); // +03:00
 \end{lstlisting}
 
-Временные зоны и часовые пояса меняются довольно часто, например в РФ последний раз менялись в~2020~году \cite{dst_news}.
+Временные зоны и часовые пояса меняются довольно часто, например в РФ последнее изменение было в~2020~году \cite{dst_news}.
+
+\end{frame}
+
+\begin{frame}[fragile]{{\tt ZonedDateTime} / Исторические изменения}
+
+  Для своей работы {\tt ZonedDateTime} использует базу данных временных зон --- Time Zone Database или {\tt tzdata} \cite{tzdata}, для которой регулярно выходят обновления.
+
+    \begin{alertblock}{Важное следствие}
+     	Чтобы ваше приложение, использующее {\tt ZonedDateTime}, работало правильно, необходимо обеспечить обновление этой базы!
+    \end{alertblock}
 
 \end{frame}
 
@@ -85,7 +109,7 @@ out.println(ztd.withYear(2015).getOffset()); // +03:00
   Как обновляется информация о временных зонах?
 
   \begin{block}{Oracle JDK}
-  	\bigskip База данных временных зон включена в дистрибутив. Узнать версию базы можно по таблице соответствий \cite{oracle_tzdata}. 
+  	База данных временных зон включена в дистрибутив. Узнать версию базы можно по таблице соответствий \cite{oracle_tzdata}. 
   	
   	Для обновления базы данных требуется обновление версии JDK. Также можно обновить существующую версию при помощи утилиты {\tt tzupdater} \cite{tzupdater}.
   \end{block}
