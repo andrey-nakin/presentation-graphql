@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>GraphQL как способ организации back-end API</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/white.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+
+    <style>
+
+        .long-code {
+            font-size: 0.3em !important;
+        }
+
+        .qr-code {
+            zoom: 50%;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+
+            <h3>Пример RESTful API</h3>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="fragment">
+                            API&nbsp;филиалов
+                            <pre class="long-code">
+                                <code data-trim data-noescape>
+                                    GET branches/br-1
+
+                                    {
+                                      "id":   "br-1",
+                                      "name": "Московский"
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="fragment">
+                            API&nbsp;отделов
+                            <pre class="long-code">
+                                <code data-trim data-noescape>
+                                    GET departments/dep-1
+
+                                    {
+                                      "id":        "dep-1",
+                                      "branch_id": "br-1",
+                                      "name":      "Консалтинг"
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="fragment">
+                            API&nbsp;сотрудников
+                            <pre class="long-code">
+                                <code data-trim data-noescape>
+                                    GET employees/emp-1
+
+                                    {
+                                      "id":       "emp-1",
+                                      "dep_id":   "dep-1",
+                                      "family":   "Обломов",
+                                      "given":    "Илья",
+                                      "patronic": "Ильич",
+                                      "photo":    "/9j/4AAQSkZJRgABAQAA..."
+                                    }
+                                </code>
+                            </pre>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <ul class="fragment">
+                <li>API 100% нормализовано.
+            </ul>
+        </section>
+
+        <section>
+            <h3>Задача</h3>
+
+            По известному ID сотрудника получить название его филиала.
+        </section>
+
+        <section>
+            <h3>1. Решение &laquo;в лоб&raquo;</h3>
+
+            <p>Выполнить 3 <u>последовательных</u> запроса к&nbsp;API.</p>
+
+            <h4 class="fragment">Недостатки</h4>
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Утроенное время выполнения операции.</li>
+                <li class="fragment fade-in-then-semi-out">Вероятность получения несогласованных данных.</li>
+                <li class="fragment fade-in-then-semi-out">Код на клиенте перестаёт быть тривиальным.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>2. Денормализация API</h3>
+
+            <p>Можно добавить в данные сотрудника соответствующие поля:</p>
+
+            <pre>
+                <code data-trim data-noescape>
+                    GET employees/emp-1?have_dep_branch_data=true
+
+                    {
+                      "id":              "emp-1",
+                      "dep_id":          "dep-1",
+                      "family":          "Обломов",
+                      "given":           "Илья",
+                      "patronic":        "Ильич",
+                      "photo":           "/9j/4AAQSkZJRgABAQAA...",
+                      "dep_branch_id":   "br-1",
+                      "dep_branch_name": "Московский"
+                    }
+                </code>
+            </pre>
+
+            <ul class="fragment">
+                <li>А есть более общее решение?</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Спасибо за внимание!</h3>
+
+            <p>Исходный код данной презентации доступен по адресу:</p>
+            <p><a href="https://bit.ly/3XC6A0Z">https://bit.ly/3XC6A0Z</a></p>
+            <img src="bit.ly.png" class="qr-code">
+        </section>
+
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script>
+         // More info about initialization & config:
+         // - https://revealjs.com/initialization/
+         // - https://revealjs.com/config/
+         Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
