@@ -24,6 +24,14 @@
             zoom: 50%;
         }
 
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "DejaVu Sans", "Carlito", "Cantarell", "Helvetica";
+}
 
 
 
@@ -40,6 +48,26 @@
             <p>Андрей Накин</p>
             <p>Компания &laquo;Рексофт&raquo;</p>
             <p>Февраль 2023</p>
+        </section>
+
+        <section>
+            <h2>Описание презентации</h2>
+
+            <ul>
+                <li>Краткий и поверхностный обзор технологии GraphQL.</li>
+                <li>Хорошо знакомые с GraphQL скорее всего не найдут ничего нового.</li>
+                <li>Будут ссылки в виде QR-кодов.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Содержание</h2>
+
+            <ol>
+                <li>Какие проблемы решает GraphQL и как?</li>
+                <li>GraphQL в многосервисном приложении.</li>
+                <li>Проблемы GraphQL.</li>
+            </ol>
         </section>
 
         <section>
@@ -93,7 +121,7 @@
                                       "family":   "Обломов",
                                       "given":    "Илья",
                                       "patronic": "Ильич",
-                                      "photo":    "/9j/4AAQSkZJRgABAQAA..."
+                                      "photo":    "/9j/4AAQSkZJRgABAQ..."
                                     }
                                 </code>
                             </pre>
@@ -141,7 +169,7 @@
                       "family":          "Обломов",
                       "given":           "Илья",
                       "patronic":        "Ильич",
-                      "photo":           "/9j/4AAQSkZJRgABAQAA...",
+                      "photo":           "/9j/4AAQSkZJRgABAQ...",
                       "dep_branch_id":   "br-1",
                       "dep_branch_name": "Московский"
                     }
@@ -176,10 +204,12 @@
          // - https://revealjs.com/config/
          Reveal.initialize({
             hash: true,
+            transition: 'fade',
 
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
          });
+
 
 
 
