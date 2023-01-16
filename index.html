@@ -17,7 +17,7 @@
     <style>
 
         .long-code {
-            font-size: 0.3em !important;
+            font-size: 0.25em !important;
         }
 
         .qr-code {
@@ -32,6 +32,7 @@
 .reveal h6 {
   font-family: "DejaVu Sans", "Carlito", "Cantarell", "Helvetica";
 }
+
 
 
 
@@ -162,7 +163,7 @@
 
             <pre>
                 <code data-trim data-noescape>
-                    GET employees/emp-1?have_dep_branch_data=true
+                    GET employees/emp-1?have-dep-branch-data=true
 
                     {
                       "id":              "emp-1",
@@ -179,6 +180,196 @@
 
             <ul class="fragment">
                 <li>А есть более общее решение?</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>3. Иерархические поля</h3>
+
+            <p>Добавим информацию об отделе и филиале непосредственно в данные сотрудника:</p>
+
+            <pre>
+                <code data-trim data-noescape>
+                    GET employees/emp-1?have-dep=true&have-dep-branch=true
+
+                    {
+                      "id":       "emp-1",
+                      "dep":      {
+                        "dep_id": "dep-1",
+                        "name":   "Консалтинг",
+                        "branch": {
+                          "id":   "br-1",
+                          "name": "Московский"
+                        }
+                      },
+                      "family":   "Обломов",
+                      "given":    "Илья",
+                      "patronic": "Ильич",
+                      "photo":    "/9j/4AAQSkZJRgABAQ..."
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h3>Проблема эффективности</h3>
+
+            <p>Наш запрос возвращает много ненужных данных, включая такие &laquo;тяжёлые&raquo; поля, как
+                <code>photo</code>.
+            </p>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на сервер.</li>
+                <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на клиента.</li>
+                <li class="fragment fade-in-then-semi-out">Избыточный трафик.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Параметры выборки</h3>
+
+            <p>Добавим в запрос параметры, регулирующие выборку данных:</p>
+
+            <pre>
+                <code class="hljs" data-trim data-noescape>
+                    GET employees/emp-1?have-dep=true&have-dep-branch=true
+                      &have-name=false&have-photo=false&have-dep-name=false
+
+                    {
+                      "id":       "emp-1",
+                      "dep":      {
+                        "dep_id": "dep-1",
+                        "branch": {
+                          "id":   "br-1",
+                          "name": "Московский"
+                        }
+                      }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h3>Задача решена!</h3>
+
+            <p>Но с ростом API начинают накапливаться другие проблемы...</p>
+        </section>
+
+        <section>
+            <h3>Проблемы на клиенте</h3>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо помнить значительный объём
+                    конфигурационных параметров.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Проблемы на сервере</h3>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо
+                    <strong>поддерживать</strong> значительный объём конфигурационных параметров.
+                </li>
+                <li class="fragment fade-in-then-semi-out">Реализация перестала быть тривиальной, помимо выборки данных
+                    добавилась логика их композиции.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Нужно общее решение</h3>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Для клиента: иметь некий специализированный язык (DSL) и с
+                    его
+                    помощью указывать, какие данные должен возвращать запрос.
+                </li>
+                <li class="fragment fade-in-then-semi-out">Для сервера: иметь некий framework, который взял бы на
+                    себя обработку параметров запроса, декомпозицию выборки данных и композицию результатов запроса.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>GraphQL</h3>
+
+            <p>Как вариант такого решения.</p>
+        </section>
+
+        <section>
+            <h3>GraphQL на клиенте</h3>
+
+            <p>GraphQL вводит язык запросов (похожий на JSON):</p>
+
+            <table width="100%">
+                <tr>
+                    <td>Запрос (QL)</td>
+                    <td>Ответ (JSON)</td>
+                </tr>
+                <tr>
+                    <td>
+                        <pre class="long-code">
+                            <code data-trim data-noescape>
+                                query {
+                                  employee(id: "emp-1") {
+                                    id
+                                    dep {
+                                      branch {
+                                        name
+                                      }
+                                    }
+                                  }
+                                }
+                            </code>
+                        </pre>
+                    </td>
+                    <td>
+                        <pre class="long-code">
+                            <code data-trim data-noescape>
+                                {
+                                  "id":  "emp-1",
+                                  "dep": {
+                                    "branch": {
+                                      "name": "Московский"
+                                    }
+                                  }
+                                }
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+            </table>
+
+            <ul>
+                <li>В параметрах запроса &mdash; ID сотрудника.</li>
+                <li>А также иерархический список полей, которые необходимо вернуть.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>GraphQL на сервере</h3>
+
+            <p>В работу вступает GraphQL-framework:</p>
+            <ol>
+                <li>Анализирует запрос.</li>
+                <li>Разбивает его на отдельные простые операции по выборке одного или нескольких однотипных объектов.
+                    Сами эти операции реализуются разработчиком.
+                </li>
+                <li>Производит композицию итогового результата из отдельных простых объектов.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>GraphQL на сервере</h3>
+
+            <p>Фактически, работа разработчика сводится к реализации следующих процедур:</p>
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Выборка одного сотрудника/отдела/филиала по его ID.</li>
+                <li class="fragment fade-in-then-semi-out">Выборка нескольких сотрудников/отделов/филиалов по каким-либо
+                    критериям (или просто всех существующих).
+                </li>
             </ul>
         </section>
 
@@ -207,21 +398,8 @@
             transition: 'fade',
 
             // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+            plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
