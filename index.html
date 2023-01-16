@@ -41,6 +41,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -368,13 +369,132 @@
         <section>
             <h3>GraphQL на сервере</h3>
 
-            <p>Фактически, работа разработчика сводится к реализации следующих процедур:</p>
+            <p>Фактически, работа разработчика сводится к реализации следующих процедур<br>(в терминах GraphQL&nbsp;&mdash;
+                резольверов, resolvers):</p>
             <ul>
                 <li class="fragment fade-in-then-semi-out">Выборка одного сотрудника/отдела/филиала по его ID.</li>
                 <li class="fragment fade-in-then-semi-out">Выборка нескольких сотрудников/отделов/филиалов по каким-либо
                     критериям (или просто всех существующих).
                 </li>
             </ul>
+        </section>
+
+        <section>
+            <h3>GraphQL на сервере</h3>
+
+            <p>Проектирование API тоже упростилось.</p>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Проектировщик объявляет типы объектов и связи между ними.
+                </li>
+                <li class="fragment fade-in-then-semi-out">Комбинирование объектов в запросе &mdash; забота клиента
+                    API.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Проблемы GraphQL</h3>
+
+            <p>...проистекают из его достоинств.</p>
+        </section>
+
+        <section>
+            <h3>Проблема N+1</h3>
+
+            <p>&laquo;Наивная&raquo; реализация GraphQL резольверов приводит к проблеме N+1.</p>
+            <p class="fragment">Решение: использовать DataLoader.</p>
+        </section>
+
+        <section>
+            <h3>DataLoader</h3>
+
+            <p>Ускорение работы с помощью простых приёмов:</p>
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Отложенная загрузка отдельного объекта (вместо объекта возвращается его Future).</li>
+                <li class="fragment fade-in-then-semi-out">Пакетная загрузка однотипных объектов.</li>
+                <li class="fragment fade-in-then-semi-out">Опциональное кеширование ранее загруженных объектов.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>DataLoader</h3>
+
+            <ul>
+                <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
+                <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
+                <li class="fragment fade-in-then-semi-out">Не привязан к GraphQL и не является частью его спецификации.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Уязвимость к DDoS-атакам</h3>
+
+            <p>Рассмотрим SDL схему:</p>
+            <pre>
+                <code class="hljs" data-trim data-noescape>
+                    type User {
+                      id: ID!
+                      friends: [User!]!
+                    }
+
+                    type Query {
+                      users: [User!]!
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h3>Уязвимость к DDoS-атакам</h3>
+
+            <p>Тогда следующий запрос...</p>
+            <pre>
+                <code class="hljs" data-trim data-noescape>
+                    query {
+                      users {
+                        friends {
+                          friends {
+                            friends {
+                              ... и так K раз
+                            }
+                          }
+                        }
+                      }
+                    }
+                </code>
+            </pre>
+            <p>...должен вернуть N<sup>K</sup> объектов.</p>
+        </section>
+
+        <section>
+            <h3>Ограничение уровня вложенности</h3>
+
+            <p>В некоторых API шлюзах и фреймворках ограничивают максимальный уровень вложенности объектов в запросе.</p>
+            <p class="fragment">В целом это работает плохо:</p>
+            <ul>
+                <li class="fragment fade-in-then-semi-out">В некоторых шаблонах проектирования требуется значительный уровень вложенности в GraphQL-запросе.</li>
+                <li class="fragment fade-in-then-semi-out">Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не требующий большой вложенности.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ограничение сложности</h3>
+            <p>Выглядит перспективнее вычислять и ограничивать вычислительную &laquo;сложность&raquo; запроса.</p>
+            <p>Но как это сделать? На уровне отдельного резольвера это невозможно в силу декомпозиции.</p>
+            <p>Оценить сложность запроса можно только видя его целиком.</p>
+        </section>
+
+        <section>
+            <h3>Ограничение продолжительности</h3>
+            <p>Возможно также ограничивать время работы каждого отдельного запроса.</p>
+            <p>Должна быть поддержка со стороны GraphQL-фреймворка, чтобы обеспечить корректное освобождение ресурсов, когда запрос принудительно останавливается.</p>
+        </section>
+
+        <section>
+            <h3>GraphQL в публичном API</h3>
+            <p>Если ваше API предполагает доступ со стороны неопределённого круга лиц, GraphQL может оказаться не лучшим выбором.</p>
+            <p>Объём усилий по защите API может превысить экономию от его использования.</p>
         </section>
 
         <section>
@@ -414,6 +534,7 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
+
 
 
 
