@@ -1,2 +1,3 @@
 # presentation-graphql
-Слайды для презентации на тему «GraphQL»
+
+Слайды для презентации «GraphQL как способ организации back-end API».
