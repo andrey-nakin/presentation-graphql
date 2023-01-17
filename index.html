@@ -52,6 +52,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -72,7 +86,7 @@
             <h2>Описание презентации</h2>
 
             <ul>
-                <li>Краткий и поверхностный обзор технологии GraphQL.</li>
+                <li>Краткий обзор технологии GraphQL.</li>
                 <li>Хорошо знакомые с GraphQL скорее всего не найдут ничего нового.</li>
                 <li>Будут ссылки в виде QR-кодов.</li>
                 <li>Картинок не будет :(</li>
@@ -135,12 +149,12 @@
                                     GET employees/emp-1
 
                                     {
-                                      "id":       "emp-1",
-                                      "dep_id":   "dep-1",
-                                      "family":   "Обломов",
-                                      "given":    "Илья",
-                                      "patronic": "Ильич",
-                                      "photo":    "/9j/4AAQSkZJRgABAQ..."
+                                      "id":         "emp-1",
+                                      "dep_id":     "dep-1",
+                                      "family":     "Обломов",
+                                      "given":      "Илья",
+                                      "patronymic": "Ильич",
+                                      "photo":      "/9j/4AAQSkZJRgABAQ..."
                                     }
                                 </code>
                             </pre>
@@ -188,7 +202,7 @@
                       "dep_id":          "dep-1",
                       "family":          "Обломов",
                       "given":           "Илья",
-                      "patronic":        "Ильич",
+                      "patronymic":      "Ильич",
                       "photo":           "/9j/4AAQSkZJRgABAQ...",
                       "dep_branch_id":   "br-1",
                       "dep_branch_name": "Московский"
@@ -220,10 +234,10 @@
                           "name": "Московский"
                         }
                       },
-                      "family":   "Обломов",
-                      "given":    "Илья",
-                      "patronic": "Ильич",
-                      "photo":    "/9j/4AAQSkZJRgABAQ..."
+                      "family":     "Обломов",
+                      "given":      "Илья",
+                      "patronymic": "Ильич",
+                      "photo":      "/9j/4AAQSkZJRgABAQ..."
                     }
                 </code>
             </pre>
@@ -409,12 +423,6 @@
         </section>
 
         <section>
-            <h3>Проблемы GraphQL</h3>
-
-            <p>...проистекают из его достоинств.</p>
-        </section>
-
-        <section>
             <h3>Зрелость</h3>
 
             <p>GraphQL &mdash; это спецификация.</p>
@@ -429,7 +437,8 @@
             <h3>Зрелость спецификации</h3>
 
             <p>В целом &mdash; production-ready.</p>
-            <p>Но некоторой функциональности очень не хватает. И не до конца устранены некоторые недоделки.</p>
+            <p>Но некоторой функциональности не хватает.</p>
+            <p>И не устранены небольшие недоделки.</p>
         </section>
 
         <section>
@@ -445,13 +454,59 @@
 
             <p>Нельзя пометить поле в input-типе как <code>@deprecated</code>.</p>
             <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
-            <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии prerelease.</p>
+            <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии
+                prerelease.</p>
         </section>
 
         <section>
             <h3>Зрелость реализаций</h3>
 
             <p>&laquo;Не всё так однозначно&raquo;.</p>
+        </section>
+
+        <section data-background-image="images/bit.ly_3QMKvu9.png" data-background-size="22ex 22ex"
+                 data-background-position="top right">
+            <h3>Реализации GraphQL</h3>
+
+            <ul>
+                <li>Есть для <a href="https://graphql.org/code/">всех популярных платформ</a>.</li>
+                <li>У них не всегда удовлетворительные стабильность, производительность и пр.</li>
+            </ul>
+        </section>
+
+        <section data-background-image="images/bit.ly_3IQLUy7.png" data-background-size="22ex 22ex"
+                 data-background-position="top right">
+            <h3><a href="https://www.apollographql.com/docs/kotlin">Apollo Kotlin</a></h3>
+
+            <ul>
+                <li>GraphQL-клиент для Java/Kotlin.</li>
+                <li>Может использоваться в Java back-end, Android, iOS/MacOS.</li>
+                <li>Генерирует код обвязки (DTO и запросы) по SDL.</li>
+                <li>Асинхронный I/O.</li>
+                <li>Официально поддерживает только gradle.</li>
+            </ul>
+        </section>
+
+        <section data-background-image="images/bit.ly_3WibkYn.png" data-background-size="22ex 22ex"
+                 data-background-position="top right">
+            <h3>Клиенты для Python</h3>
+
+            <ul>
+                <li>Нет личного опыта.</li>
+                <li>У коллег были проблемы с производительностью, возможно связанные с большим (более 100&nbsp;кб)
+                    размером GraphQL
+                    схемы.
+                </li>
+                <li>Рекомендуем для ознакомления <a href="https://habr.com/ru/post/707374/">статью на Хабре</a> (см.
+                    QR-код).
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Проблемы GraphQL</h3>
+
+            <p>...проистекают из его достоинств.</p>
         </section>
 
         <section>
@@ -618,6 +673,20 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
