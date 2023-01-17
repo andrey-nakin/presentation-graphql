@@ -33,6 +33,9 @@
   font-family: "DejaVu Sans", "Carlito", "Cantarell", "Helvetica";
 }
 
+
+
+
     </style>
 </head>
 <body>
@@ -323,7 +326,7 @@
         <section>
             <h3>GraphQL на клиенте</h3>
 
-            <p>GraphQL вводит язык запросов (QL):</p>
+            <p>GraphQL вводит язык запросов (query language):</p>
 
             <table width="100%">
                 <tr>
@@ -585,7 +588,7 @@
                 запросе.</p>
             <p class="fragment">В целом это работает плохо:</p>
             <ul>
-                <li class="fragment fade-in-then-semi-out">В некоторых шаблонах проектирования требуется значительный
+                <li class="fragment fade-in-then-semi-out">В некоторых идиомах требуется значительный
                     уровень вложенности в GraphQL-запросе.
                 </li>
                 <li class="fragment fade-in-then-semi-out">Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не
@@ -598,7 +601,7 @@
             <h3>Ограничение сложности</h3>
             <p>Выглядит перспективнее вычислять и ограничивать вычислительную &laquo;сложность&raquo; запроса.</p>
             <p>Но как это сделать? На уровне отдельного резольвера это невозможно в силу декомпозиции.</p>
-            <p>Оценить сложность запроса можно только видя его целиком.</p>
+            <p>Оценить сложность запроса можно только в процессе его выполнения.</p>
         </section>
 
         <section>
@@ -622,7 +625,7 @@
         <section data-background-image="images/hacker.gif">
             <h3>Главная проблема безопасности GraphQL...</h3>
             <p>... &mdash; это QL.</p>
-            <p>Полноценный язык запросов предоставляет клиенту очень широкие полномочия.</p>
+            <p>Язык запросов предоставляет клиенту очень широкие полномочия.</p>
             <p>Злонамеренный клиент может этим воспользоваться.</p>
         </section>
 
@@ -670,6 +673,9 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
+
+
+
 
 </script>
 </body>
