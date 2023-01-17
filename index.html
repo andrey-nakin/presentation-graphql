@@ -36,6 +36,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -287,6 +288,9 @@
                 <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо помнить значительный объём
                     конфигурационных параметров.
                 </li>
+                <li class="fragment fade-in-then-semi-out">При добавлении новых полей в API нужно их явно отключать. Или
+                    делать новые поля отключёнными по умолчанию.
+                </li>
             </ul>
         </section>
 
@@ -416,6 +420,13 @@
         </section>
 
         <section>
+            <h3>Следствие</h3>
+
+            <p>GraphQL хорошо работает в &laquo;классическом&raquo; web-приложении, когда 80-90% запросов &mdash; на чтение.</p>
+            <p>В некоторых случаях (например, какая-нибудь CRM-система) использование GraphQL не даёт никакой выгоды.</p>
+        </section>
+
+        <section>
             <h3>Зрелость</h3>
 
             <p>GraphQL &mdash; это спецификация.</p>
@@ -533,11 +544,11 @@
             <h3>DataLoader</h3>
 
             <ul>
-                <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
-                <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
                 <li class="fragment fade-in-then-semi-out">Не привязан к GraphQL и не является частью его
                     спецификации.
                 </li>
+                <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
+                <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
             </ul>
         </section>
 
@@ -633,7 +644,7 @@
             <h3>GraphQL в публичном API</h3>
             <p>Если ваше API предполагает доступ со стороны неопределённого круга лиц, GraphQL может оказаться не лучшим
                 выбором.</p>
-            <p>Объём усилий по защите API может превысить экономию от его использования.</p>
+            <p>Объём усилий по защите API может обесценить пользу от использования GraphQL.</p>
         </section>
 
         <section>
@@ -673,6 +684,7 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
+
 
 
 
