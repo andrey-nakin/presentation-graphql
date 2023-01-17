@@ -43,6 +43,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -50,7 +59,9 @@
     <div class="slides">
 
         <section>
-            <h2><img src="images/graphql-logo.png" style="height: 3ex"><br>как способ организации <nobr>back-end&nbsp;API</nobr></h2>
+            <h2><img src="images/graphql-logo.png" style="height: 3ex"><br>как способ организации
+                <nobr>back-end&nbsp;API</nobr>
+            </h2>
 
             <p>Андрей Накин</p>
             <p>Компания &laquo;Рексофт&raquo;</p>
@@ -381,7 +392,7 @@
         </section>
 
         <section>
-            <h3>GraphQL на сервере</h3>
+            <h3>GraphQL и системный анализ</h3>
 
             <p>Проектирование API тоже упростилось.</p>
 
@@ -391,6 +402,9 @@
                 <li class="fragment fade-in-then-semi-out">Комбинирование объектов в запросе &mdash; забота клиента
                     API.
                 </li>
+                <li class="fragment fade-in-then-semi-out">Это касается только выборки данных! Изменение данных на
+                    сервере не сильно изменилось по сравнению с REST/SOAP.
+                </li>
             </ul>
         </section>
 
@@ -398,6 +412,46 @@
             <h3>Проблемы GraphQL</h3>
 
             <p>...проистекают из его достоинств.</p>
+        </section>
+
+        <section>
+            <h3>Зрелость</h3>
+
+            <p>GraphQL &mdash; это спецификация.</p>
+            <p>Поэтому говоря о зрелости технологии надо разделять</p>
+            <ul>
+                <li>саму спецификацию GraphQL</li>
+                <li>и её реализации на разных платформах.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Зрелость спецификации</h3>
+
+            <p>В целом &mdash; production-ready.</p>
+            <p>Но некоторой функциональности очень не хватает. И не до конца устранены некоторые недоделки.</p>
+        </section>
+
+        <section>
+            <h3>Недостатки спецификации</h3>
+
+            <p>В GraphQL нет namespaces.</p>
+            <p>С ростом API, особенно при использовании API&nbsp;Federation это требует внимательности от
+                проектировщиков.</p>
+        </section>
+
+        <section>
+            <h3>Недостатки спецификации</h3>
+
+            <p>Нельзя пометить поле в input-типе как <code>@deprecated</code>.</p>
+            <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
+            <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии prerelease.</p>
+        </section>
+
+        <section>
+            <h3>Зрелость реализаций</h3>
+
+            <p>&laquo;Не всё так однозначно&raquo;.</p>
         </section>
 
         <section>
@@ -564,6 +618,15 @@
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
          });
+
+
+
+
+
+
+
+
+
 
 
 
