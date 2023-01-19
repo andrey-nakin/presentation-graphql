@@ -1,111 +1,106 @@
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>GraphQL как способ организации back-end API</title>
+  <title>GraphQL как способ организации back-end API</title>
 
-    <link rel="stylesheet" href="dist/reset.css">
-    <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/white.css">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
 
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css">
-
-
-    <style>
-
-        .long-code {
-            font-size: 0.25em !important;
-        }
-
-        .qr-code {
-            zoom: 50%;
-        }
-
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4,
-.reveal h5,
-.reveal h6 {
-  font-family: "DejaVu Sans", "Carlito", "Cantarell", "Helvetica";
-}
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
 
 
+  <style>
 
+    .long-code {
+      font-size: 0.25em !important;
+    }
 
+    .qr-code {
+      zoom: 50%;
+    }
 
-    </style>
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4,
+    .reveal h5,
+    .reveal h6 {
+      font-family: "DejaVu Sans", "Carlito", "Cantarell", "Helvetica";
+    }
+  </style>
 </head>
 <body>
 <div class="reveal">
-    <div class="slides">
+  <div class="slides">
 
-        <section>
-            <img src="images/graphql-logo-only.png" style="height: 5ex">
-            <h2>GraphQL как способ организации
-                <nobr>back-end&nbsp;API</nobr>
-            </h2>
+    <section>
+      <img src="images/graphql-logo-only.png" style="height: 5ex" alt="GraphQL Logo">
+      <h2>GraphQL как способ организации
+        <nobr>back-end&nbsp;API</nobr>
+      </h2>
 
-            <p>
-                Андрей Накин<br>
-                Компания &laquo;Рексофт&raquo;<br>
-                Февраль 2023
-            </p>
-        </section>
+      <p>
+        Андрей Накин<br>
+        Компания &laquo;Рексофт&raquo;<br>
+        Февраль 2023
+      </p>
+    </section>
 
-        <section>
-            <h2>Описание презентации</h2>
+    <section>
+      <h2>Описание презентации</h2>
 
-            <ul>
-                <li>Краткий обзор технологии GraphQL.</li>
-                <li>Хорошо знакомые с GraphQL скорее всего не найдут ничего нового.</li>
-                <li>Будут ссылки в виде QR-кодов.</li>
-                <li>Картинок не будет :(</li>
-            </ul>
-        </section>
+      <ul>
+        <li>Краткий обзор технологии GraphQL.</li>
+        <li>Хорошо знакомые с GraphQL скорее всего не найдут ничего нового.</li>
+        <li>Будут ссылки в виде QR-кодов.</li>
+        <li>Картинок не будет :(</li>
+      </ul>
+    </section>
 
-        <section>
-            <h2>Содержание</h2>
+    <section>
+      <h2>Содержание</h2>
 
-            <ol>
-                <li>Какие проблемы решает GraphQL и как?</li>
-                <li>GraphQL в многосервисном приложении.</li>
-                <li>Зрелость GraphQL и решений на его основе.</li>
-                <li>Проблемы GraphQL.</li>
-            </ol>
-        </section>
+      <ol>
+        <li>Какие проблемы решает GraphQL и как?</li>
+        <li>GraphQL в многосервисном приложении.</li>
+        <li>Зрелость GraphQL и решений на его основе.</li>
+        <li>Проблемы GraphQL.</li>
+      </ol>
+    </section>
 
-        <section data-background-image="images/graphql-logo-only.png" data-background-size="10%"
-                 data-background-position="top 1ex left 1ex">
-            <h2>Quick facts</h2>
+    <section data-background-image="images/graphql-logo-only.png" data-background-size="10%"
+             data-background-position="top 1ex left 1ex">
+      <h2>Quick facts</h2>
 
-            <ul>
-                <li>GraphQL &mdash; спецификация, включающая в себя язык запросов, язык описания схемы и др.</li>
-                <li>Создана в Facebook в&nbsp;2012.</li>
-                <li>Первая версия спецификации выпущена в&nbsp;2015, текущая &mdash; в&nbsp;2021.
-                </li>
-                <li>С&nbsp;2019 развитием занимается некоммерческая организация GraphQL Foundation.</li>
-                <li>Спецификация выпущена под лицензией Open Web Foundation.</li>
-            </ul>
-        </section>
+      <ul>
+        <li>GraphQL &mdash; спецификация, включающая в себя язык запросов, язык описания схемы и др.</li>
+        <li>Создана в Facebook в&nbsp;2012.</li>
+        <li>Первая версия спецификации выпущена в&nbsp;2015, текущая &mdash; в&nbsp;2021.
+        </li>
+        <li>С&nbsp;2019 развитием занимается некоммерческая организация GraphQL Foundation.</li>
+        <li>Спецификация выпущена под лицензией Open Web Foundation.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h2>Назначение GraphQL</h2>
+    <section>
+      <h2>Назначение GraphQL</h2>
 
-            <p>Решить проблемы типичного RESTful API.</p>
-        </section>
+      <p>Решить проблемы типичного RESTful API.</p>
+    </section>
 
-        <section>
-            <h3>Пример RESTful API</h3>
-            <table width="100%">
-                <tr>
-                    <td>
-                        <div>
-                            API&nbsp;филиалов
-                            <pre class="long-code">
+    <section>
+      <h3>Пример RESTful API</h3>
+      <table style="width: 100%">
+        <tr>
+          <td>
+            <div>
+              API&nbsp;филиалов
+              <pre class="long-code">
                                 <code data-trim data-noescape>
                                     GET branches/br-1
 
@@ -115,13 +110,13 @@
                                     }
                                 </code>
                             </pre>
-                        </div>
-                    </td>
+            </div>
+          </td>
 
-                    <td>
-                        <div class="fragment">
-                            API&nbsp;отделов
-                            <pre class="long-code">
+          <td>
+            <div class="fragment">
+              API&nbsp;отделов
+              <pre class="long-code">
                                 <code data-trim data-noescape>
                                     GET departments/dep-1
 
@@ -132,13 +127,13 @@
                                     }
                                 </code>
                             </pre>
-                        </div>
-                    </td>
+            </div>
+          </td>
 
-                    <td>
-                        <div class="fragment">
-                            API&nbsp;сотрудников
-                            <pre class="long-code">
+          <td>
+            <div class="fragment">
+              API&nbsp;сотрудников
+              <pre class="long-code">
                                 <code data-trim data-noescape>
                                     GET employees/emp-1
 
@@ -152,42 +147,42 @@
                                     }
                                 </code>
                             </pre>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-            <ul class="fragment">
-                <li>API 100% нормализовано.
-                <li>На back-end оно реализуется при помощи простых операций <code>findAll</code>/<code>findById</code>.
-            </ul>
-        </section>
+      <ul class="fragment">
+        <li>API 100% нормализовано.
+        <li>На back-end оно реализуется при помощи простых операций <code>findAll</code>/<code>findById</code>.
+      </ul>
+    </section>
 
-        <section>
-            <h3>Задача</h3>
+    <section>
+      <h3>Задача</h3>
 
-            По известному ID сотрудника получить название его филиала.
-        </section>
+      По известному ID сотрудника получить название его филиала.
+    </section>
 
-        <section>
-            <h3>1. Решение &laquo;в лоб&raquo;</h3>
+    <section>
+      <h3>1. Решение &laquo;в лоб&raquo;</h3>
 
-            <p>Выполнить 3 <u>последовательных</u> запроса к&nbsp;API.</p>
+      <p>Выполнить 3 <u>последовательных</u> запроса к&nbsp;API.</p>
 
-            <h4 class="fragment">Недостатки</h4>
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Утроенное время выполнения операции.</li>
-                <li class="fragment fade-in-then-semi-out">Код на клиенте перестаёт быть тривиальным.</li>
-                <li class="fragment fade-in-then-semi-out">Вероятность получения несогласованных данных.</li>
-            </ul>
-        </section>
+      <h4 class="fragment">Недостатки</h4>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Утроенное время выполнения операции.</li>
+        <li class="fragment fade-in-then-semi-out">Код на клиенте перестаёт быть тривиальным.</li>
+        <li class="fragment fade-in-then-semi-out">Вероятность получения несогласованных данных.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>2. Денормализация API</h3>
+    <section>
+      <h3>2. Денормализация API</h3>
 
-            <p>Можно добавить в данные сотрудника соответствующие поля:</p>
+      <p>Можно добавить в данные сотрудника соответствующие поля:</p>
 
-            <pre>
+      <pre>
                 <code data-trim data-noescape>
                     GET employees/emp-1?have-dep-branch-data=true
 
@@ -204,17 +199,17 @@
                 </code>
             </pre>
 
-            <ul class="fragment">
-                <li>А есть более общее решение?</li>
-            </ul>
-        </section>
+      <ul class="fragment">
+        <li>А есть более общее решение?</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>3. Иерархические поля</h3>
+    <section>
+      <h3>3. Иерархические поля</h3>
 
-            <p>Добавим информацию об отделе и филиале непосредственно в данные сотрудника:</p>
+      <p>Добавим информацию об отделе и филиале непосредственно в данные сотрудника:</p>
 
-            <pre>
+      <pre>
                 <code data-trim data-noescape>
                     GET employees/emp-1?have-dep=true&have-dep-branch=true
 
@@ -235,28 +230,28 @@
                     }
                 </code>
             </pre>
-        </section>
+    </section>
 
-        <section>
-            <h3>Проблема эффективности</h3>
+    <section>
+      <h3>Проблема эффективности</h3>
 
-            <p>Наш запрос возвращает много ненужных данных, включая такие &laquo;тяжёлые&raquo; поля, как
-                <code>photo</code>.
-            </p>
+      <p>Наш запрос возвращает много ненужных данных, включая такие &laquo;тяжёлые&raquo; поля, как
+        <code>photo</code>.
+      </p>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на сервер.</li>
-                <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на клиента.</li>
-                <li class="fragment fade-in-then-semi-out">Избыточный трафик.</li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на сервер.</li>
+        <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на клиента.</li>
+        <li class="fragment fade-in-then-semi-out">Избыточный трафик.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Параметры выборки</h3>
+    <section>
+      <h3>Параметры выборки</h3>
 
-            <p>Добавим в запрос параметры, регулирующие выборку данных:</p>
+      <p>Добавим в запрос параметры, регулирующие выборку данных:</p>
 
-            <pre>
+      <pre>
                 <code class="hljs" data-trim data-noescape>
                     GET employees/emp-1?have-dep=true&have-dep-branch=true
                       &have-name=false&have-photo=false&have-dep-name=false
@@ -273,72 +268,72 @@
                     }
                 </code>
             </pre>
-        </section>
+    </section>
 
-        <section data-background-image="images/nasyalnika.gif">
-            <h3>Задача решена!</h3>
+    <section data-background-image="images/nasyalnika.gif">
+      <h3>Задача решена!</h3>
 
-            <p>Но с ростом API начинают накапливаться другие проблемы...</p>
-        </section>
+      <p>Но с ростом API начинают накапливаться другие проблемы...</p>
+    </section>
 
-        <section>
-            <h3>Проблемы на клиенте</h3>
+    <section>
+      <h3>Проблемы на клиенте</h3>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо помнить значительный объём
-                    конфигурационных параметров.
-                </li>
-                <li class="fragment fade-in-then-semi-out">При добавлении новых полей в API нужно их явно отключать. Или
-                    делать новые поля отключёнными по умолчанию.
-                </li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо помнить значительный объём
+          конфигурационных параметров.
+        </li>
+        <li class="fragment fade-in-then-semi-out">При добавлении новых полей в API нужно их явно отключать. Или
+          делать новые поля отключёнными по умолчанию.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Проблемы на сервере</h3>
+    <section>
+      <h3>Проблемы на сервере</h3>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо
-                    <strong>поддерживать</strong> значительный объём конфигурационных параметров.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Реализация перестала быть тривиальной, помимо выборки данных
-                    добавилась логика их композиции.
-                </li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо
+          <strong>поддерживать</strong> значительный объём конфигурационных параметров.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Реализация перестала быть тривиальной, помимо выборки данных
+          добавилась логика их композиции.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Нужно общее решение</h3>
+    <section>
+      <h3>Нужно общее решение</h3>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Для клиента: иметь некий специализированный язык (DSL) и с
-                    его
-                    помощью указывать, какие данные должен возвращать запрос.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Для сервера: иметь некий framework, который взял бы на
-                    себя обработку параметров запроса, декомпозицию выборки данных и композицию результатов запроса.
-                </li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Для клиента: иметь некий специализированный язык (DSL) и с
+          его
+          помощью указывать, какие данные должен возвращать запрос.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Для сервера: иметь некий framework, который взял бы на
+          себя обработку параметров запроса, декомпозицию выборки данных и композицию результатов запроса.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>GraphQL</h3>
+    <section>
+      <h3>GraphQL</h3>
 
-            <p>Как вариант такого решения.</p>
-        </section>
+      <p>Как вариант такого решения.</p>
+    </section>
 
-        <section>
-            <h3>GraphQL на клиенте</h3>
+    <section>
+      <h3>GraphQL на клиенте</h3>
 
-            <p>GraphQL вводит язык запросов (query language):</p>
+      <p>GraphQL вводит язык запросов (query language):</p>
 
-            <table width="100%">
-                <tr>
-                    <td>Запрос (QL)</td>
-                    <td>Ответ (JSON)</td>
-                </tr>
-                <tr>
-                    <td>
+      <table style="width: 100%">
+        <tr>
+          <td>Запрос (QL)</td>
+          <td>Ответ (JSON)</td>
+        </tr>
+        <tr>
+          <td>
                         <pre class="long-code">
                             <code data-trim data-noescape>
                                 query {
@@ -353,8 +348,8 @@
                                 }
                             </code>
                         </pre>
-                    </td>
-                    <td>
+          </td>
+          <td>
                         <pre class="long-code">
                             <code data-trim data-noescape>
                                 {
@@ -367,196 +362,204 @@
                                 }
                             </code>
                         </pre>
-                    </td>
-                </tr>
-            </table>
+          </td>
+        </tr>
+      </table>
 
-            <ul>
-                <li>В параметрах запроса &mdash; ID сотрудника.</li>
-                <li>А также иерархический список полей, которые необходимо вернуть.</li>
-            </ul>
-        </section>
+      <ul>
+        <li>В параметрах запроса &mdash; ID сотрудника.</li>
+        <li>А также иерархический список полей, которые необходимо вернуть.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>GraphQL на сервере</h3>
+    <section>
+      <h3>GraphQL на сервере</h3>
 
-            <p>В работу вступает GraphQL-framework:</p>
-            <ol>
-                <li>Анализирует запрос.</li>
-                <li>Разбивает его на отдельные простые операции по выборке одного или нескольких однотипных объектов.
-                </li>
-                <li>Производит композицию итогового результата из отдельных простых объектов.</li>
-            </ol>
-        </section>
+      <p>В работу вступает GraphQL-framework:</p>
+      <ol>
+        <li>Анализирует запрос.</li>
+        <li>Разбивает его на отдельные простые операции по выборке одного или нескольких однотипных объектов.
+        </li>
+        <li>Производит композицию итогового результата из отдельных простых объектов.</li>
+      </ol>
+    </section>
 
-        <section>
-            <h3>GraphQL на сервере</h3>
+    <section>
+      <h3>GraphQL на сервере</h3>
 
-            <p>Фактически, работа разработчика сводится к реализации следующих процедур<br>(в терминах GraphQL&nbsp;&mdash;
-                резольверов, resolvers):</p>
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Выборка одного сотрудника/отдела/филиала по его ID.</li>
-                <li class="fragment fade-in-then-semi-out">Выборка нескольких сотрудников/отделов/филиалов по каким-либо
-                    критериям (или просто всех существующих).
-                </li>
-            </ul>
-        </section>
+      <p>Фактически, работа разработчика сводится к реализации следующих процедур<br>(в терминах GraphQL&nbsp;&mdash;
+        резольверов, resolvers):</p>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Выборка одного сотрудника/отдела/филиала по его ID.</li>
+        <li class="fragment fade-in-then-semi-out">Выборка нескольких сотрудников/отделов/филиалов по каким-либо
+          критериям (или просто всех существующих).
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>GraphQL и системный анализ</h3>
+    <section>
+      <h3>GraphQL и системный анализ</h3>
 
-            <p>Проектирование API тоже упростилось.</p>
+      <p>Проектирование API тоже упростилось.</p>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Проектировщик объявляет типы объектов и связи между ними.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Комбинирование объектов в запросе &mdash; забота клиента
-                    API.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Это касается только выборки данных! Изменение данных на
-                    сервере не сильно изменилось по сравнению с REST/SOAP.
-                </li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Проектировщик объявляет типы объектов и связи между ними.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Комбинирование объектов в запросе &mdash; забота клиента
+          API.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Это касается только выборки данных! Изменение данных на
+          сервере не сильно изменилось по сравнению с REST/SOAP.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Следствие</h3>
+    <section>
+      <h3>Следствие</h3>
 
-            <p>GraphQL хорошо работает в &laquo;классическом&raquo; web-приложении, когда 80-90% запросов &mdash; на чтение.</p>
-            <p>В некоторых случаях (например, какая-нибудь CRM-система) использование GraphQL не даёт никакой выгоды.</p>
-        </section>
+      <p>GraphQL хорошо работает в &laquo;классическом&raquo; web-приложении, когда 80-90% запросов &mdash; на
+        чтение.</p>
+      <p>В некоторых случаях (например, какая-нибудь CRM-система) использование GraphQL не даёт никакой выгоды.</p>
+    </section>
 
-        <section>
-            <h3>Зрелость</h3>
+    <section>
+      <h3>Зрелость</h3>
 
-            <p>GraphQL &mdash; это спецификация.</p>
-            <p>Поэтому говоря о зрелости технологии надо разделять</p>
-            <ul>
-                <li>саму спецификацию GraphQL</li>
-                <li>и её реализации на разных платформах.</li>
-            </ul>
-        </section>
+      <p>GraphQL &mdash; это спецификация.</p>
+      <p>Поэтому говоря о зрелости технологии надо разделять</p>
+      <ul>
+        <li>саму спецификацию GraphQL</li>
+        <li>и её реализации на разных платформах.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Зрелость спецификации</h3>
+    <section>
+      <h3>Зрелость спецификации</h3>
 
-            <p>В целом &mdash; production-ready.</p>
-            <p>Но некоторой функциональности не хватает.</p>
-            <p>И не устранены небольшие недоделки.</p>
-        </section>
+      <p>В целом &mdash; production-ready.</p>
+      <p>Но некоторой функциональности не хватает.</p>
+      <p>И не устранены небольшие недоделки.</p>
+    </section>
 
-        <section>
-            <h3>Недостатки спецификации</h3>
+    <section>
+      <h3>Недостатки спецификации</h3>
 
-            <p>В GraphQL нет namespaces.</p>
-            <p>С ростом API, особенно при использовании API&nbsp;Federation это требует внимательности от
-                проектировщиков.</p>
-        </section>
+      <p>В GraphQL нет namespaces.</p>
+      <p>С ростом API, особенно при использовании API&nbsp;Federation это требует внимательности от
+        проектировщиков.</p>
+    </section>
 
-        <section>
-            <h3>Недостатки спецификации</h3>
+    <section>
+      <h3>Недостатки спецификации</h3>
 
-            <p>Нельзя пометить поле в input-типе как <code>@deprecated</code>.</p>
-            <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
-            <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии
-                prerelease.</p>
-        </section>
+      <p>Нельзя пометить поле в input-типе как <code>@deprecated</code>.</p>
+      <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
+      <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии
+        prerelease.</p>
+    </section>
 
-        <section>
-            <h3>Недостатки спецификации</h3>
+    <section>
+      <h3>Недостатки спецификации</h3>
 
-            <p>Отсутствуют стандартные механизмы разделения доступа на основе ролей пользователей.</p>
-            <p>Есть разнообразные решения от независимых вендоров.</p>
-        </section>
+      <p>Отсутствуют стандартные механизмы разделения доступа на основе ролей пользователей.</p>
+      <p>Есть разнообразные решения от независимых вендоров.</p>
+    </section>
 
-        <section>
-            <h3>Зрелость реализаций</h3>
+    <section>
+      <h3>Зрелость реализаций</h3>
 
-            <p>&laquo;Не всё так однозначно&raquo;.</p>
-        </section>
+      <p>&laquo;Не всё так однозначно&raquo;.</p>
+    </section>
 
-        <section data-background-image="images/bit.ly_3QMKvu9.png" data-background-size="17%"
-                 data-background-position="top right">
-            <h3>Реализации GraphQL</h3>
+    <section data-background-image="images/bit.ly_3QMKvu9.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3>Реализации GraphQL</h3>
 
-            <ul>
-                <li>Есть для <a href="https://graphql.org/code/" target="_blank">всех популярных платформ</a>.</li>
-                <li>У них не всегда удовлетворительные стабильность, производительность и пр.</li>
-            </ul>
-        </section>
+      <ul>
+        <li>Есть для <a href="https://graphql.org/code/" target="_blank">всех популярных платформ</a>.</li>
+        <li>У них не всегда удовлетворительные стабильность, производительность и пр.</li>
+      </ul>
+    </section>
 
-        <section data-background-image="images/bit.ly_3IQLUy7.png" data-background-size="17%"
-                 data-background-position="top right">
-            <h3><a href="https://www.apollographql.com/docs/kotlin" target="_blank">Apollo Kotlin</a></h3>
+    <section data-background-image="images/bit.ly_3IQLUy7.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3><a href="https://www.apollographql.com/docs/kotlin" target="_blank">Apollo Kotlin</a></h3>
 
-            <ul>
-                <li>GraphQL-клиент для Java/Kotlin.</li>
-                <li>Может использоваться в Java back-end, Android, iOS/MacOS.</li>
-                <li>Генерирует код обвязки (DTO и запросы) по SDL.</li>
-                <li>Асинхронный I/O.</li>
-                <li>Официально поддерживает только gradle.</li>
-            </ul>
-        </section>
+      <ul>
+        <li>GraphQL-клиент для Java/Kotlin.</li>
+        <li>Может использоваться в Java back-end, Android, iOS/MacOS.</li>
+        <li>Генерирует код обвязки (DTO и запросы) по SDL.</li>
+        <li>Асинхронный I/O.</li>
+        <li>Официально поддерживает только gradle.</li>
+      </ul>
+    </section>
 
-        <section data-background-image="images/bit.ly_3WibkYn.png" data-background-size="17%"
-                 data-background-position="top right">
-            <h3>Клиенты для Python</h3>
+    <section data-background-image="images/bit.ly_3WibkYn.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3>Клиенты для Python</h3>
 
-            <ul>
-                <li>Нет личного опыта.</li>
-                <li>У коллег были проблемы с производительностью, возможно связанные с большим (более 100&nbsp;кб)
-                    размером GraphQL
-                    схемы.
-                </li>
-                <li>Рекомендуем <a href="https://habr.com/ru/post/707374/" target="_blank">статью на Хабре</a> (см.
-                    QR-код).
-                </li>
-            </ul>
-        </section>
+      <ul>
+        <li>Нет личного опыта.</li>
+        <li>У коллег были проблемы с производительностью, возможно связанные с большим (более 100&nbsp;кб)
+          размером GraphQL
+          схемы.
+        </li>
+        <li>Рекомендуем <a href="https://habr.com/ru/post/707374/" target="_blank">статью на Хабре</a> (см.
+          QR-код).
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Проблемы GraphQL</h3>
+    <section>
+      <h3>Проблемы GraphQL</h3>
 
-            <p>...проистекают из его достоинств.</p>
-        </section>
+      <p>...проистекают из его достоинств.</p>
+    </section>
 
-        <section>
-            <h3>Проблема N+1</h3>
+    <section>
+      <h3>Проблема N+1</h3>
 
-            <p>&laquo;Наивная&raquo; реализация GraphQL резольверов приводит к проблеме N+1.</p>
-            <p class="fragment">Решение: использовать DataLoader.</p>
-        </section>
+      <p>&laquo;Наивная&raquo; реализация GraphQL резольверов приводит к проблеме N+1.</p>
+      <p class="fragment">Решение: использовать DataLoader.</p>
+    </section>
 
-        <section>
-            <h3>DataLoader</h3>
+    <section>
+      <h3>DataLoader</h3>
 
-            <p>Ускорение работы с помощью простых приёмов:</p>
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Отложенная загрузка отдельного объекта (вместо объекта
-                    возвращается его Future).
-                </li>
-                <li class="fragment fade-in-then-semi-out">Пакетная загрузка однотипных объектов.</li>
-                <li class="fragment fade-in-then-semi-out">Опциональное кеширование ранее загруженных объектов.</li>
-            </ul>
-        </section>
+      <p>Ускорение работы с помощью простых приёмов:</p>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Отложенная загрузка отдельного объекта (вместо объекта
+          возвращается его Future).
+        </li>
+        <li class="fragment fade-in-then-semi-out">Пакетная загрузка однотипных объектов.</li>
+        <li class="fragment fade-in-then-semi-out">Опциональное кеширование ранее загруженных объектов.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>DataLoader</h3>
+    <section>
+      <h3>DataLoader</h3>
 
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Не привязан к GraphQL и не является частью его
-                    спецификации.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
-                <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
-            </ul>
-        </section>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Не привязан к GraphQL и не является частью его
+          спецификации.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
+        <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Уязвимость к DDoS-атакам</h3>
+    <section>
+      <h3>Уязвимость к DDoS-атакам</h3>
+      <p>GraphQL по своей природе, в силу наличия QL уязвим к атакам.</p>
+      <p>Язык запросов предоставляет клиенту очень широкие полномочия.</p>
+      <p>Злонамеренный клиент может этим воспользоваться.</p>
+    </section>
 
-            <p>Рассмотрим SDL схему:</p>
-            <pre>
+    <section>
+      <h3>Пример DDoS атаки</h3>
+
+      <p>Рассмотрим SDL схему:</p>
+      <pre>
                 <code class="hljs" data-trim data-noescape>
                     type User {
                       id: ID!
@@ -568,13 +571,13 @@
                     }
                 </code>
             </pre>
-        </section>
+    </section>
 
-        <section>
-            <h3>Уязвимость к DDoS-атакам</h3>
+    <section>
+      <h3>Пример DDoS атаки</h3>
 
-            <p>Тогда следующий запрос...</p>
-            <pre>
+      <p>Тогда следующий запрос...</p>
+      <pre>
                 <code class="hljs" data-trim data-noescape>
                     query {
                       users {
@@ -589,83 +592,76 @@
                     }
                 </code>
             </pre>
-            <p>...должен вернуть N<sup>K</sup> объектов.</p>
-        </section>
+      <p>... должен вернуть N<sup>K</sup> объектов.</p>
+    </section>
 
-        <section>
-            <h3>Ограничение уровня вложенности</h3>
+    <section>
+      <h3>Ограничение уровня вложенности</h3>
 
-            <p>В некоторых API шлюзах и фреймворках ограничивают максимальный уровень вложенности объектов в
-                запросе.</p>
-            <p class="fragment">В целом это работает плохо:</p>
-            <ul>
-                <li class="fragment fade-in-then-semi-out">В некоторых идиомах требуется значительный
-                    уровень вложенности в GraphQL-запросе.
-                </li>
-                <li class="fragment fade-in-then-semi-out">Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не
-                    требующий большой вложенности.
-                </li>
-            </ul>
-        </section>
+      <p>В некоторых API шлюзах и фреймворках ограничивают максимальный уровень вложенности объектов в
+        запросе.</p>
+      <p class="fragment">В целом это работает плохо:</p>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">В некоторых идиомах требуется значительный
+          уровень вложенности в GraphQL-запросе.
+        </li>
+        <li class="fragment fade-in-then-semi-out">Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не
+          требующий большой вложенности.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Ограничение сложности</h3>
-            <p>Выглядит перспективнее вычислять и ограничивать вычислительную &laquo;сложность&raquo; запроса.</p>
-            <p>Но как это сделать? На уровне отдельного резольвера это невозможно в силу декомпозиции.</p>
-            <p>Оценить сложность запроса можно только в процессе его выполнения.</p>
-        </section>
+    <section>
+      <h3>Ограничение сложности</h3>
+      <p>Выглядит перспективнее вычислять и ограничивать вычислительную &laquo;сложность&raquo; запроса.</p>
+      <p>Но как это сделать? На уровне отдельного резольвера это невозможно в силу декомпозиции.</p>
+      <p>Оценить сложность запроса можно только в процессе его выполнения.</p>
+    </section>
 
-        <section>
-            <h3>Ограничение сложности</h3>
-            <p>Нужна поддержка со стороны GraphQL-фреймворка.</p>
-            <ul>
-                <li class="fragment fade-in-then-semi-out">Kickstart GraphQL: поддержка заявлена.</li>
-                <li class="fragment fade-in-then-semi-out"><code>spring-graphql</code>: есть открытый тикет на
-                    доработку, поддержка обещана в будущей версии&nbsp;1.1.
-                </li>
-            </ul>
-        </section>
+    <section>
+      <h3>Ограничение сложности</h3>
+      <p>Нужна поддержка со стороны GraphQL-фреймворка.</p>
+      <ul>
+        <li class="fragment fade-in-then-semi-out">Kickstart GraphQL: поддержка заявлена.</li>
+        <li class="fragment fade-in-then-semi-out"><code>spring-graphql</code>: есть открытый тикет на
+          доработку, поддержка обещана в будущей версии&nbsp;1.1.
+        </li>
+      </ul>
+    </section>
 
-        <section>
-            <h3>Ограничение продолжительности</h3>
-            <p>Возможно также ограничивать время работы каждого отдельного запроса.</p>
-            <p>Должна быть поддержка со стороны GraphQL-фреймворка, чтобы обеспечить корректное освобождение ресурсов,
-                когда запрос принудительно останавливается.</p>
-        </section>
+    <section>
+      <h3>Ограничение продолжительности</h3>
+      <p>Возможно также ограничивать время работы каждого отдельного запроса.</p>
+      <p>Должна быть поддержка со стороны GraphQL-фреймворка, чтобы обеспечить корректное освобождение ресурсов,
+        когда запрос принудительно останавливается.</p>
+    </section>
 
-        <section data-background-image="images/hacker.gif">
-            <h3>Главная проблема безопасности GraphQL...</h3>
-            <p>... &mdash; это QL.</p>
-            <p>Язык запросов предоставляет клиенту очень широкие полномочия.</p>
-            <p>Злонамеренный клиент может этим воспользоваться.</p>
-        </section>
+    <section>
+      <h3>GraphQL в публичном API</h3>
+      <p>Если ваше API предполагает доступ со стороны неопределённого круга лиц, GraphQL может оказаться не лучшим
+        выбором.</p>
+      <p>Объём усилий по защите API может обесценить пользу от использования GraphQL.</p>
+    </section>
 
-        <section>
-            <h3>GraphQL в публичном API</h3>
-            <p>Если ваше API предполагает доступ со стороны неопределённого круга лиц, GraphQL может оказаться не лучшим
-                выбором.</p>
-            <p>Объём усилий по защите API может обесценить пользу от использования GraphQL.</p>
-        </section>
+    <section>
+      <h3>GraphQL API шлюзы</h3>
+      <img class="r-stretch" src="images/cncf-api-gateways.png" alt="CNCF Screenshot">
+    </section>
 
-        <section>
-            <h3>GraphQL API шлюзы</h3>
-            <img class="r-stretch" src="images/cncf-api-gateways.png">
-        </section>
+    <section>
+      <h3>Спасибо за внимание!</h3>
 
-        <section>
-            <h3>Спасибо за внимание!</h3>
+      <p>Исходный код данной презентации доступен по адресу:</p>
+      <p>
+        <a target="_blank" href="https://bit.ly/3XC6A0Z">
+          https://bit.ly/3XC6A0Z<br>
+          <img src="images/bit.ly_3XC6A0Z.png" class="qr-code" alt="QR Code">
+        </a>
+      </p>
 
-            <p>Исходный код данной презентации доступен по адресу:</p>
-            <p>
-                <a target="_blank" href="https://bit.ly/3XC6A0Z">
-                    https://bit.ly/3XC6A0Z<br>
-                    <img src="images/bit.ly_3XC6A0Z.png" class="qr-code">
-                </a>
-            </p>
+    </section>
 
-        </section>
-
-    </div>
+  </div>
 </div>
 
 <script src="dist/reveal.js"></script>
@@ -674,21 +670,15 @@
 <script src="plugin/highlight/highlight.js"></script>
 <script src="plugin/zoom/zoom.js"></script>
 <script>
-         // More info about initialization & config:
-         // - https://revealjs.com/initialization/
-         // - https://revealjs.com/config/
-         Reveal.initialize({
-            hash: true,
-            transition: 'fade',
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true, transition: 'fade',
 
-            // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [ RevealHighlight,  RevealNotes, RevealZoom ]
-         });
-
-
-
-
-
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [RevealHighlight, RevealNotes, RevealZoom]
+  })
 </script>
 </body>
 </html>
