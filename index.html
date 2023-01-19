@@ -421,6 +421,79 @@
     </section>
 
     <section>
+      <h3>Версионность</h3>
+
+      <p>Вспомним, как это делается в REST:</p>
+      <pre>
+        <code data-trim data-noescape>
+          https://myapi.io/v1/employees
+        </code>
+      </pre>
+      <ul>
+        <li>Клиент API явно указывает версию API в запросе.</li>
+        <li>Сервер поддерживает множественные версии, кроме совсем устаревших.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Версионность в GraphQL</h3>
+
+      <ul>
+        <li>Вместо набора фиксированных версий предлагается &laquo;continuous evolution&raquo;.</li>
+        <li>Изменения в API вносятся таким образом, чтобы не ломать обратную совместимость.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Continuous evolution</h3>
+
+      <p>а) Нельзя менять семантику и формат существующих элементов API.</p>
+      <p>В официальной документации это сформулировано как &laquo;always avoiding breaking changes&raquo;.</p>
+    </section>
+
+    <section>
+      <h3>Continuous evolution</h3>
+
+      <p>б) При добавлении в API новых элементов, существующие запросы не меняют поведения:</p>
+      <pre>
+        <code data-trim data-noescape>
+          # В существующий тип...
+          type Employee {
+            firstName: String
+
+            # ... добавили новое поле
+            givenName: String
+          }
+
+          # На ранее созданный запрос новое поле не влияет
+          query {
+            employees {
+              firstName
+            }
+          }
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <h3>Continuous evolution</h3>
+
+      <p>в) Устаревшие поля помечаются как deprecated и спустя какое-то время удаляются из схемы:</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Employee {
+            # Устаревшее, но пока не удалённое поле
+            firstName: String @deprecated(reason: "Use givenName")
+
+            # Новое поле
+            givenName: String
+          }
+        </code>
+      </pre>
+      <p>Клиенты API должны отслеживать deprecation.</p>
+    </section>
+
+    <section>
       <h3>Зрелость</h3>
 
       <p>GraphQL &mdash; это спецификация.</p>
