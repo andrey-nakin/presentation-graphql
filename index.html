@@ -99,15 +99,15 @@
             <div>
               API&nbsp;филиалов
               <pre class="long-code">
-                                <code data-trim data-noescape>
-                                    GET branches/br-1
+                <code data-trim data-noescape>
+                  GET branches/br-1
 
-                                    {
-                                      "id":   "br-1",
-                                      "name": "Московский"
-                                    }
-                                </code>
-                            </pre>
+                  {
+                    "id":   "br-1",
+                    "name": "Московский"
+                  }
+                </code>
+              </pre>
             </div>
           </td>
 
@@ -115,16 +115,16 @@
             <div class="fragment">
               API&nbsp;отделов
               <pre class="long-code">
-                                <code data-trim data-noescape>
-                                    GET departments/dep-1
+                <code data-trim data-noescape>
+                  GET departments/dep-1
 
-                                    {
-                                      "id":        "dep-1",
-                                      "branch_id": "br-1",
-                                      "name":      "Консалтинг"
-                                    }
-                                </code>
-                            </pre>
+                  {
+                    "id":        "dep-1",
+                    "branch_id": "br-1",
+                    "name":      "Консалтинг"
+                  }
+                </code>
+              </pre>
             </div>
           </td>
 
@@ -132,19 +132,19 @@
             <div class="fragment">
               API&nbsp;сотрудников
               <pre class="long-code">
-                                <code data-trim data-noescape>
-                                    GET employees/emp-1
+                <code data-trim data-noescape>
+                  GET employees/emp-1
 
-                                    {
-                                      "id":         "emp-1",
-                                      "dep_id":     "dep-1",
-                                      "family":     "Обломов",
-                                      "given":      "Илья",
-                                      "patronymic": "Ильич",
-                                      "photo":      "/9j/4AAQSkZJRgABAQ..."
-                                    }
-                                </code>
-                            </pre>
+                  {
+                    "id":         "emp-1",
+                    "dep_id":     "dep-1",
+                    "family":     "Обломов",
+                    "given":      "Илья",
+                    "patronymic": "Ильич",
+                    "photo":      "/9j/4AAQSkZJRgABAQ..."
+                  }
+                </code>
+              </pre>
             </div>
           </td>
         </tr>
@@ -181,21 +181,21 @@
       <p>Можно добавить в данные сотрудника соответствующие поля:</p>
 
       <pre>
-                <code data-trim data-noescape>
-                    GET employees/emp-1?have-dep-branch-data=true
+        <code data-trim data-noescape>
+          GET employees/emp-1?have-dep-branch-data=true
 
-                    {
-                      "id":              "emp-1",
-                      "dep_id":          "dep-1",
-                      "family":          "Обломов",
-                      "given":           "Илья",
-                      "patronymic":      "Ильич",
-                      "photo":           "/9j/4AAQSkZJRgABAQ...",
-                      "dep_branch_id":   "br-1",
-                      "dep_branch_name": "Московский"
-                    }
-                </code>
-            </pre>
+          {
+            "id":              "emp-1",
+            "dep_id":          "dep-1",
+            "family":          "Обломов",
+            "given":           "Илья",
+            "patronymic":      "Ильич",
+            "photo":           "/9j/4AAQSkZJRgABAQ...",
+            "dep_branch_id":   "br-1",
+            "dep_branch_name": "Московский"
+          }
+        </code>
+      </pre>
 
       <ul class="fragment">
         <li>А есть более общее решение?</li>
@@ -208,26 +208,26 @@
       <p>Добавим информацию об отделе и филиале непосредственно в данные сотрудника:</p>
 
       <pre>
-                <code data-trim data-noescape>
-                    GET employees/emp-1?have-dep=true&have-dep-branch=true
+        <code data-trim data-noescape>
+          GET employees/emp-1?have-dep=true&have-dep-branch=true
 
-                    {
-                      "id":       "emp-1",
-                      "dep":      {
-                        "dep_id": "dep-1",
-                        "name":   "Консалтинг",
-                        "branch": {
-                          "id":   "br-1",
-                          "name": "Московский"
-                        }
-                      },
-                      "family":     "Обломов",
-                      "given":      "Илья",
-                      "patronymic": "Ильич",
-                      "photo":      "/9j/4AAQSkZJRgABAQ..."
-                    }
-                </code>
-            </pre>
+          {
+            "id":       "emp-1",
+            "dep":      {
+              "dep_id": "dep-1",
+              "name":   "Консалтинг",
+              "branch": {
+                "id":   "br-1",
+                "name": "Московский"
+              }
+            },
+            "family":     "Обломов",
+            "given":      "Илья",
+            "patronymic": "Ильич",
+            "photo":      "/9j/4AAQSkZJRgABAQ..."
+          }
+        </code>
+      </pre>
     </section>
 
     <section>
@@ -250,22 +250,22 @@
       <p>Добавим в запрос параметры, регулирующие выборку данных:</p>
 
       <pre>
-                <code class="hljs" data-trim data-noescape>
-                    GET employees/emp-1?have-dep=true&have-dep-branch=true
-                      &have-name=false&have-photo=false&have-dep-name=false
+        <code class="hljs" data-trim data-noescape>
+          GET employees/emp-1?have-dep=true&have-dep-branch=true
+            &have-name=false&have-photo=false&have-dep-name=false
 
-                    {
-                      "id":       "emp-1",
-                      "dep":      {
-                        "dep_id": "dep-1",
-                        "branch": {
-                          "id":   "br-1",
-                          "name": "Московский"
-                        }
-                      }
-                    }
-                </code>
-            </pre>
+          {
+            "id":       "emp-1",
+            "dep":      {
+              "dep_id": "dep-1",
+              "branch": {
+                "id":   "br-1",
+                "name": "Московский"
+              }
+            }
+          }
+        </code>
+      </pre>
     </section>
 
     <section data-background-image="images/nasyalnika.gif">
@@ -332,34 +332,34 @@
         </tr>
         <tr>
           <td>
-                        <pre class="long-code">
-                            <code data-trim data-noescape>
-                                query {
-                                  employee(id: "emp-1") {
-                                    id
-                                    dep {
-                                      branch {
-                                        name
-                                      }
-                                    }
-                                  }
-                                }
-                            </code>
-                        </pre>
+            <pre class="long-code">
+              <code data-trim data-noescape>
+                query {
+                  employee(id: "emp-1") {
+                    id
+                    dep {
+                      branch {
+                        name
+                      }
+                    }
+                  }
+                }
+              </code>
+            </pre>
           </td>
           <td>
-                        <pre class="long-code">
-                            <code data-trim data-noescape>
-                                {
-                                  "id":  "emp-1",
-                                  "dep": {
-                                    "branch": {
-                                      "name": "Московский"
-                                    }
-                                  }
-                                }
-                            </code>
-                        </pre>
+            <pre class="long-code">
+              <code data-trim data-noescape>
+                {
+                  "id":  "emp-1",
+                  "dep": {
+                    "branch": {
+                      "name": "Московский"
+                    }
+                  }
+                }
+              </code>
+            </pre>
           </td>
         </tr>
       </table>
@@ -565,17 +565,17 @@
 
       <p>Рассмотрим SDL схему:</p>
       <pre>
-                <code class="hljs" data-trim data-noescape>
-                    type User {
-                      id: ID!
-                      friends: [User!]!
-                    }
+        <code class="hljs" data-trim data-noescape>
+          type User {
+            id: ID!
+            friends: [User!]!
+          }
 
-                    type Query {
-                      users: [User!]!
-                    }
-                </code>
-            </pre>
+          type Query {
+            users: [User!]!
+          }
+        </code>
+      </pre>
     </section>
 
     <section>
@@ -583,20 +583,20 @@
 
       <p>Тогда следующий запрос...</p>
       <pre>
-                <code class="hljs" data-trim data-noescape>
-                    query {
-                      users {
-                        friends {
-                          friends {
-                            friends {
-                              ... и так K раз
-                            }
-                          }
-                        }
-                      }
-                    }
-                </code>
-            </pre>
+        <code class="hljs" data-trim data-noescape>
+          query {
+            users {
+              friends {
+                friends {
+                  friends {
+                    ... и так K раз
+                  }
+                }
+              }
+            }
+          }
+        </code>
+      </pre>
       <p>... должен вернуть N<sup>K</sup> объектов.</p>
     </section>
 
