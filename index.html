@@ -66,7 +66,7 @@
       <ol>
         <li>Какие проблемы решает GraphQL и как?</li>
         <li>GraphQL в многосервисном приложении.</li>
-        <li>Зрелость GraphQL и решений на его основе.</li>
+        <li>Зрелость GraphQL и его реализаций.</li>
         <li>Проблемы GraphQL.</li>
       </ol>
     </section>
@@ -112,7 +112,7 @@
           </td>
 
           <td>
-            <div class="fragment">
+            <div>
               API&nbsp;отделов
               <pre class="long-code">
                 <code data-trim data-noescape>
@@ -129,7 +129,7 @@
           </td>
 
           <td>
-            <div class="fragment">
+            <div>
               API&nbsp;сотрудников
               <pre class="long-code">
                 <code data-trim data-noescape>
@@ -150,7 +150,7 @@
         </tr>
       </table>
 
-      <ul class="fragment">
+      <ul>
         <li>API 100% нормализовано.
         <li>На back-end оно реализуется при помощи простых операций <code>findAll</code>/<code>findById</code>.
       </ul>
@@ -167,11 +167,11 @@
 
       <p>Выполнить 3 <u>последовательных</u> запроса к&nbsp;API.</p>
 
-      <h4 class="fragment">Недостатки</h4>
+      <h4>Недостатки</h4>
       <ul>
-        <li class="fragment fade-in-then-semi-out">Утроенное время выполнения операции.</li>
-        <li class="fragment fade-in-then-semi-out">Код на клиенте перестаёт быть тривиальным.</li>
-        <li class="fragment fade-in-then-semi-out">Вероятность получения несогласованных данных.</li>
+        <li>Утроенное время выполнения операции.</li>
+        <li>Код на клиенте перестаёт быть тривиальным.</li>
+        <li>Вероятность получения несогласованных данных.</li>
       </ul>
     </section>
 
@@ -238,9 +238,9 @@
       </p>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на сервер.</li>
-        <li class="fragment fade-in-then-semi-out">Избыточная нагрузка на клиента.</li>
-        <li class="fragment fade-in-then-semi-out">Избыточный трафик.</li>
+        <li>Избыточная нагрузка на сервер.</li>
+        <li>Избыточная нагрузка на клиента.</li>
+        <li>Избыточный трафик.</li>
       </ul>
     </section>
 
@@ -268,7 +268,7 @@
       </pre>
     </section>
 
-    <section data-background-image="images/nasyalnika.gif">
+    <section d-ata-background-image="images/nasyalnika.gif">
       <h3>Задача решена!</h3>
 
       <p>Но с ростом API начинают накапливаться другие проблемы...</p>
@@ -278,10 +278,10 @@
       <h3>Проблемы на клиенте</h3>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо помнить значительный объём
+        <li>API стало громоздким: необходимо помнить значительный объём
           конфигурационных параметров.
         </li>
-        <li class="fragment fade-in-then-semi-out">При добавлении новых полей в API нужно их явно отключать. Или
+        <li>При добавлении новых полей в API нужно их явно отключать. Или
           делать новые поля отключёнными по умолчанию.
         </li>
       </ul>
@@ -291,10 +291,10 @@
       <h3>Проблемы на сервере</h3>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">API стало громоздким: необходимо
+        <li c-lass="fragment fade-in-then-semi-out">API стало громоздким: необходимо
           <strong>поддерживать</strong> значительный объём конфигурационных параметров.
         </li>
-        <li class="fragment fade-in-then-semi-out">Реализация перестала быть тривиальной, помимо выборки данных
+        <li>Реализация перестала быть тривиальной, помимо выборки данных
           добавилась логика их композиции.
         </li>
       </ul>
@@ -304,12 +304,11 @@
       <h3>Нужно общее решение</h3>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">Для клиента: иметь некий специализированный язык (DSL) и с
-          его
-          помощью указывать, какие данные должен возвращать запрос.
+        <li>Для клиента: иметь некий специализированный язык (DSL) и с его помощью указывать, какие данные должен
+          возвращать запрос.
         </li>
-        <li class="fragment fade-in-then-semi-out">Для сервера: иметь некий framework, который взял бы на
-          себя обработку параметров запроса, декомпозицию выборки данных и композицию результатов запроса.
+        <li>Для сервера: иметь некий framework, который взял бы на себя обработку параметров запроса, декомпозицию
+          выборки данных и композицию результатов запроса.
         </li>
       </ul>
     </section>
@@ -388,9 +387,8 @@
       <p>Фактически, работа разработчика сводится к реализации следующих процедур<br>(в терминах GraphQL&nbsp;&mdash;
         резольверов, resolvers):</p>
       <ul>
-        <li class="fragment fade-in-then-semi-out">Выборка одного сотрудника/отдела/филиала по его ID.</li>
-        <li class="fragment fade-in-then-semi-out">Выборка нескольких сотрудников/отделов/филиалов по каким-либо
-          критериям (или просто всех существующих).
+        <li>Выборка одного сотрудника/отдела/филиала по его ID.</li>
+        <li>Выборка нескольких сотрудников/отделов/филиалов по каким-либо критериям (или просто всех существующих).
         </li>
       </ul>
     </section>
@@ -401,13 +399,10 @@
       <p>Проектирование API тоже упростилось.</p>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">Проектировщик объявляет типы объектов и связи между ними.
-        </li>
-        <li class="fragment fade-in-then-semi-out">Комбинирование объектов в запросе &mdash; забота клиента
-          API.
-        </li>
-        <li class="fragment fade-in-then-semi-out">Это касается только выборки данных! Изменение данных на
-          сервере не сильно изменилось по сравнению с REST/SOAP.
+        <li>Проектировщик объявляет типы объектов и связи между ними.</li>
+        <li>Комбинирование объектов в запросе &mdash; забота клиента API.</li>
+        <li>Это касается только выборки данных! Изменение данных на сервере не сильно изменилось по сравнению с
+          REST/SOAP.
         </li>
       </ul>
     </section>
@@ -418,6 +413,127 @@
       <p>GraphQL хорошо работает в &laquo;классическом&raquo; web-приложении, когда 80-90% запросов &mdash; на
         чтение.</p>
       <p>В некоторых случаях (например, какая-нибудь CRM-система) использование GraphQL не даёт никакой выгоды.</p>
+    </section>
+
+    <section>
+      <h3>SDL &mdash; язык описания API</h3>
+
+      <p>Спецификация GraphQL включает в себя
+        <nobr>schema definition language</nobr>
+        , SDL.
+      </p>
+      <p>Это язык описания вашего API во всей его полноте.</p>
+      <p>В мире REST неким аналогом является спецификация OpenAPI.</p>
+    </section>
+
+    <section>
+      <h3>SDL &mdash; язык описания API</h3>
+
+      <p>Пример простейшей схемы.</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Employee {        # Типы данных
+            id: ID!
+            name: String
+            friends: [Employee!] # Связи между типами
+          }
+
+          type Query {           # Операции чтения данных
+            getEmployee(id: ID!): Employee
+          }
+
+          type Mutation {        # Операции обновления данных
+            addEmployee(name: String): Employee
+            updateEmployee(id: ID!, name: String): Employee
+            deleteEmployee(id: ID!): ID!
+          }
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <h3>Документация в SDL</h3>
+
+      <p>Схема может включать в себя документацию, которая является
+        <nobr>first-class feature.</nobr>
+      </p>
+      <pre>
+        <code data-trim data-noescape>
+          """
+            Тип описывает сотрудника.
+            Сотрудник имеет идентификатор и имя.
+          """
+          type Employee {
+            "Идентификатор сотрудника."
+            id: ID!
+
+            "Имя сотрудника."
+            name: String
+          }
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <h3>Метаданные в SDL</h3>
+
+      <p>Описание API может включать в себя метаданные посредством добавления в схему <i>директив</i>:</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Employee {
+            name: String
+            numOfLogins: Int @needRole(role: "ADMIN")
+          }
+        </code>
+      </pre>
+      <p><code>@needRole</code> &mdash; пользовательская директива.</p>
+    </section>
+
+    <section>
+      <h3>Интроспекция</h3>
+
+      <p>GraphQL включает в себя API по исследованию схемы со стороны клиентов:</p>
+      <table style="width: 100%">
+        <tr>
+          <td>Запрос (QL)</td>
+          <td>Ответ (JSON)</td>
+        </tr>
+        <tr>
+          <td>
+            <pre class="long-code">
+              <code data-trim data-noescape>
+                query {
+                  __type(name: "Employee") {
+                    fields {
+                      name
+                    }
+                  }
+                }
+              </code>
+            </pre>
+          </td>
+          <td>
+            <pre class="long-code">
+              <code data-trim data-noescape>
+                {
+                  "data": {
+                    "__type": {
+                      "fields": [
+                        {
+                          "name": "id"
+                        },
+                        {
+                          "name": "name"
+                        }
+                      ]
+                    }
+                  }
+                }
+              </code>
+            </pre>
+          </td>
+        </tr>
+      </table>
     </section>
 
     <section>
@@ -523,7 +639,7 @@
     <section>
       <h3>Нет namespaces</h3>
 
-      <p>С ростом API, особенно при использовании API&nbsp;Federation это требует внимательности от
+      <p>В объёмном API, особенно при использовании API&nbsp;Federation это требует внимательности от
         проектировщиков.</p>
     </section>
 
@@ -598,7 +714,7 @@
       <h3>Проблема N+1</h3>
 
       <p>&laquo;Наивная&raquo; реализация GraphQL резольверов приводит к проблеме N+1.</p>
-      <p class="fragment">Решение: использовать DataLoader.</p>
+      <p>Решение: использовать DataLoader.</p>
     </section>
 
     <section>
@@ -606,11 +722,9 @@
 
       <p>Ускорение работы с помощью простых приёмов:</p>
       <ul>
-        <li class="fragment fade-in-then-semi-out">Отложенная загрузка отдельного объекта (вместо объекта
-          возвращается его Future).
-        </li>
-        <li class="fragment fade-in-then-semi-out">Пакетная загрузка однотипных объектов.</li>
-        <li class="fragment fade-in-then-semi-out">Опциональное кеширование ранее загруженных объектов.</li>
+        <li>Отложенная загрузка отдельного объекта (вместо объекта возвращается его Future).</li>
+        <li>Пакетная загрузка однотипных объектов.</li>
+        <li>Опциональное кеширование ранее загруженных объектов.</li>
       </ul>
     </section>
 
@@ -618,11 +732,9 @@
       <h3>DataLoader</h3>
 
       <ul>
-        <li class="fragment fade-in-then-semi-out">Не привязан к GraphQL и не является частью его
-          спецификации.
-        </li>
-        <li class="fragment fade-in-then-semi-out">Включён в реализацию всех GraphQL-framework'ов.</li>
-        <li class="fragment fade-in-then-semi-out">Обязателен к использованию!</li>
+        <li>Не привязан к GraphQL и не является частью его спецификации.</li>
+        <li>Включён в реализацию всех GraphQL-framework'ов.</li>
+        <li>Обязателен к использованию!</li>
       </ul>
     </section>
 
@@ -638,7 +750,7 @@
     <section>
       <h3>Пример DDoS атаки</h3>
 
-      <p>Рассмотрим SDL схему:</p>
+      <p>Рассмотрим схему:</p>
       <pre>
         <code class="hljs" data-trim data-noescape>
           type User {
@@ -678,16 +790,11 @@
     <section>
       <h3>Ограничение уровня вложенности</h3>
 
-      <p>В некоторых API шлюзах и фреймворках ограничивают максимальный уровень вложенности объектов в
-        запросе.</p>
-      <p class="fragment">В целом это работает плохо:</p>
+      <p>Реализация GraphQL может ограничивать максимальный уровень вложенности объектов в запросе.</p>
+      <p>В целом это работает плохо:</p>
       <ul>
-        <li class="fragment fade-in-then-semi-out">Некоторые идиомы QL требуют значительный
-          уровень вложенности в GraphQL-запросе.
-        </li>
-        <li class="fragment fade-in-then-semi-out">Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не
-          требующий большой вложенности.
-        </li>
+        <li>Некоторые идиомы QL требуют значительный уровень вложенности в GraphQL-запросе.</li>
+        <li>Часто можно подобрать &laquo;тяжёлый&raquo; запрос, не требующий большой вложенности.</li>
       </ul>
     </section>
 
@@ -702,9 +809,8 @@
       <h3>Ограничение сложности</h3>
       <p>Нужна поддержка со стороны GraphQL-фреймворка.</p>
       <ul>
-        <li class="fragment fade-in-then-semi-out">Kickstart GraphQL: поддержка заявлена.</li>
-        <li class="fragment fade-in-then-semi-out"><code>spring-graphql</code>: есть открытый тикет на
-          доработку, поддержка обещана в будущей версии&nbsp;1.1.
+        <li>Kickstart GraphQL: поддержка заявлена.</li>
+        <li><code>spring-graphql</code>: есть открытый тикет на доработку, поддержка обещана в будущей версии&nbsp;1.1.
         </li>
       </ul>
     </section>
