@@ -452,44 +452,6 @@
     </section>
 
     <section>
-      <h3>Документация в SDL</h3>
-
-      <p>Схема может включать в себя документацию, которая является
-        <nobr>first-class feature.</nobr>
-      </p>
-      <pre>
-        <code data-trim data-noescape>
-          """
-            Тип описывает сотрудника.
-            Сотрудник имеет идентификатор и имя.
-          """
-          type Employee {
-            "Идентификатор сотрудника."
-            id: ID!
-
-            "Имя сотрудника."
-            name: String
-          }
-        </code>
-      </pre>
-    </section>
-
-    <section>
-      <h3>Метаданные в SDL</h3>
-
-      <p>Описание API может включать в себя метаданные посредством добавления в схему <i>директив</i>:</p>
-      <pre>
-        <code data-trim data-noescape>
-          type Employee {
-            name: String
-            numOfLogins: Int @needRole(role: "ADMIN")
-          }
-        </code>
-      </pre>
-      <p><code>@needRole</code> &mdash; пользовательская директива.</p>
-    </section>
-
-    <section>
       <h3>Интроспекция</h3>
 
       <p>GraphQL включает в себя API по исследованию схемы со стороны клиентов:</p>
@@ -534,6 +496,44 @@
           </td>
         </tr>
       </table>
+    </section>
+
+    <section>
+      <h3>Документация в SDL</h3>
+
+      <p>Схема может включать в себя документацию, которая является
+        <nobr>first-class feature.</nobr>
+      </p>
+      <pre>
+        <code data-trim data-noescape>
+          """
+            Тип описывает сотрудника.
+            Сотрудник имеет идентификатор и имя.
+          """
+          type Employee {
+            "Идентификатор сотрудника."
+            id: ID!
+
+            "Имя сотрудника."
+            name: String
+          }
+        </code>
+      </pre>
+    </section>
+
+    <section>
+      <h3>Метаданные в SDL</h3>
+
+      <p>Описание API может включать в себя метаданные посредством добавления в схему <i>директив</i>:</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Employee {
+            name: String
+            numOfLogins: Int @needRole(role: "ADMIN")
+          }
+        </code>
+      </pre>
+      <p><code>@needRole</code> &mdash; пользовательская директива.</p>
     </section>
 
     <section>
