@@ -66,8 +66,8 @@
       <ol>
         <li>Какие проблемы решает GraphQL и как?</li>
         <li>GraphQL в многосервисном приложении.</li>
-        <li>Зрелость GraphQL и его реализаций.</li>
         <li>Проблемы GraphQL.</li>
+        <li>Зрелость GraphQL и его реализаций.</li>
       </ol>
     </section>
 
@@ -610,101 +610,6 @@
     </section>
 
     <section>
-      <h3>Зрелость</h3>
-
-      <p>GraphQL &mdash; это спецификация.</p>
-      <p>Поэтому говоря о зрелости технологии надо разделять</p>
-      <ul>
-        <li>саму спецификацию GraphQL</li>
-        <li>и её реализации на разных платформах.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>Зрелость спецификации</h3>
-
-      <p>В целом &mdash; production-ready.</p>
-      <p>Но некоторой функциональности не хватает.</p>
-      <p>И не устранены небольшие недоделки.</p>
-    </section>
-
-    <section>
-      <h3>Нет выгрузки (uploading) файлов</h3>
-
-      <p>Спецификация не рассматривает данный аспект.</p>
-      <p>Приходится использовать дополнительную точку входа или дополнительные компоненты (например, Minio).</p>
-      <p>Некоторые реализации (например, Netfix&nbsp;DSG) предлагают свои решения.</p>
-    </section>
-
-    <section>
-      <h3>Нет namespaces</h3>
-
-      <p>В объёмном API, особенно при использовании API&nbsp;Federation это требует внимательности от
-        проектировщиков.</p>
-    </section>
-
-    <section>
-      <h3>Input field deprecation</h3>
-
-      <p>Нельзя пометить поле в input-типе или аргумент в запросе как <code>@deprecated</code>.</p>
-      <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
-      <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии
-        prerelease.</p>
-    </section>
-
-    <section>
-      <h3>Отсутствует RBAC</h3>
-
-      <p>Отсутствуют стандартные механизмы разделения доступа на основе ролей пользователей.</p>
-      <p>Есть разнообразные решения от независимых вендоров.</p>
-    </section>
-
-    <section>
-      <h3>Зрелость реализаций</h3>
-
-      <p>&laquo;Не всё так однозначно&raquo;.</p>
-    </section>
-
-    <section data-background-image="images/bit.ly_3QMKvu9.png" data-background-size="17%"
-             data-background-position="top right">
-      <h3>Реализации GraphQL</h3>
-
-      <ul>
-        <li>Есть для <a href="https://graphql.org/code/" target="_blank">всех популярных платформ</a>.</li>
-        <li>У них не всегда удовлетворительные стабильность, производительность и пр.</li>
-      </ul>
-    </section>
-
-    <section data-background-image="images/bit.ly_3IQLUy7.png" data-background-size="17%"
-             data-background-position="top right">
-      <h3><a href="https://www.apollographql.com/docs/kotlin" target="_blank">Apollo Kotlin</a></h3>
-
-      <ul>
-        <li>GraphQL-клиент для Java/Kotlin.</li>
-        <li>Может использоваться в Java back-end, Android, iOS/MacOS.</li>
-        <li>Генерирует код обвязки (DTO и запросы) по SDL.</li>
-        <li>Асинхронный I/O.</li>
-        <li>Официально поддерживает только gradle.</li>
-      </ul>
-    </section>
-
-    <section data-background-image="images/bit.ly_3WibkYn.png" data-background-size="17%"
-             data-background-position="top right">
-      <h3>Клиенты для Python</h3>
-
-      <ul>
-        <li>Нет личного опыта.</li>
-        <li>У коллег были проблемы с производительностью, возможно связанные с большим (более 100&nbsp;кб)
-          размером GraphQL
-          схемы.
-        </li>
-        <li>Рекомендуем <a href="https://habr.com/ru/post/707374/" target="_blank">статью на Хабре</a> (см.
-          QR-код).
-        </li>
-      </ul>
-    </section>
-
-    <section>
       <h3>Проблемы GraphQL</h3>
 
       <p>...проистекают из его достоинств.</p>
@@ -717,7 +622,8 @@
         <li>Добавляет сложность в проект.</li>
         <li>Повышает требования к разработчиками.</li>
       </ul>
-      <p>Следствие: GraphQL может оказаться бесполезным для простого API с&nbsp;небольшим числом сценариев использования.</p>
+      <p><strong>Следствие:</strong> GraphQL может оказаться бесполезным для небольшого API с&nbsp;малым числом
+        сценариев использования.</p>
     </section>
 
     <section>
@@ -730,8 +636,8 @@
     <section>
       <h3>Проблема N+1</h3>
 
-      <p>&laquo;Наивная&raquo; реализация GraphQL резольверов приводит к проблеме N+1.</p>
-      <p>Решение: использовать шаблон проектирования DataLoader.</p>
+      <p>&laquo;Наивная&raquo; реализация резольверов в типичном GraphQL фреймворке приводит к проблеме N+1.</p>
+      <p><strong>Решение:</strong> использовать шаблон проектирования DataLoader.</p>
     </section>
 
     <section>
@@ -809,9 +715,11 @@
       <h3>Ограничение сложности</h3>
       <p>Выглядит перспективнее вычислять и ограничивать вычислительную &laquo;сложность&raquo; запроса.</p>
       <p>Но как это сделать? На уровне отдельного резольвера это невозможно в силу декомпозиции.</p>
-      <p>Оценить сложность запроса можно только в процессе его выполнения.</p>
+      <p>Оценить сложность запроса можно только в процессе его выполнения &mdash; нужна поддержка со стороны
+        фреймворка.</p>
     </section>
 
+    <!--
     <section>
       <h3>Ограничение сложности</h3>
       <p>Нужна поддержка со стороны GraphQL-фреймворка.</p>
@@ -821,19 +729,114 @@
         </li>
       </ul>
     </section>
+    -->
 
     <section>
       <h3>Ограничение продолжительности</h3>
       <p>Возможно также ограничивать время работы каждого отдельного запроса.</p>
-      <p>Должна быть поддержка со стороны GraphQL-фреймворка, чтобы обеспечить корректное освобождение ресурсов,
+      <p>Должна быть поддержка со стороны фреймворка, чтобы обеспечить корректное освобождение ресурсов,
         когда запрос принудительно останавливается.</p>
     </section>
 
     <section>
+      <img src="images/warning.png" style="zoom: 50%">
       <h3>GraphQL в публичном API</h3>
       <p>Если ваше API предполагает доступ со стороны неопределённого круга лиц, GraphQL может оказаться не лучшим
         выбором.</p>
       <p>Объём усилий по защите API может обесценить пользу от использования GraphQL.</p>
+    </section>
+
+    <section>
+      <h3>Зрелость</h3>
+
+      <p>GraphQL &mdash; это спецификация.</p>
+      <p>Поэтому говоря о зрелости технологии надо разделять</p>
+      <ul>
+        <li>саму спецификацию GraphQL</li>
+        <li>и её реализации на разных платформах.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Зрелость спецификации</h3>
+
+      <p>В целом &mdash; production-ready.</p>
+      <p>Но некоторой функциональности не хватает.</p>
+      <p>И не устранены небольшие недоделки.</p>
+    </section>
+
+    <section>
+      <h3>Нет выгрузки (uploading) файлов</h3>
+
+      <p>Спецификация не рассматривает данный аспект.</p>
+      <p>Приходится использовать дополнительную точку входа или дополнительные компоненты (например, Minio).</p>
+      <p>Некоторые реализации (например, Netfix&nbsp;DSG) предлагают свои решения.</p>
+    </section>
+
+    <section>
+      <h3>Нет namespaces</h3>
+
+      <p>В объёмном API, особенно при использовании API&nbsp;Federation это требует внимательности от
+        проектировщиков.</p>
+    </section>
+
+    <section>
+      <h3>Input field deprecation</h3>
+
+      <p>Нельзя пометить поле в input-типе или аргумент в запросе как <code>@deprecated</code>.</p>
+      <p>Выглядит как банальная недоделка, пропущенная по недоразумению.</p>
+      <p>Исправлено в черновике (working draft) спецификации GraphQL, которая на момент написания в стадии
+        prerelease.</p>
+    </section>
+
+    <section>
+      <h3>Отсутствует RBAC</h3>
+
+      <ul>
+        <li>Отсутствуют стандартные механизмы разделения доступа на основе ролей пользователей, role-based access
+          control.
+        </li>
+        <li>Есть разнообразные решения от независимых вендоров.</li>
+      </ul>
+    </section>
+
+    <section data-background-image="images/bit.ly_3QMKvu9.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3>Зрелость реализаций</h3>
+
+      <ul>
+        <li>Существуют для <a href="https://graphql.org/code/" target="_blank">всех популярных платформ</a>.</li>
+        <li>У них не всегда удовлетворительные стабильность, производительность и пр.</li>
+      </ul>
+    </section>
+
+    <section data-background-image="images/bit.ly_3IQLUy7.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3><a href="https://www.apollographql.com/docs/kotlin" target="_blank">Apollo Kotlin</a></h3>
+
+      <ul>
+        <li>GraphQL-клиент для Java/Kotlin.</li>
+        <li>Может использоваться в Java back-end, Android, iOS/MacOS.</li>
+        <li>Генерирует код обвязки (DTO и запросы) по SDL.</li>
+        <li>Асинхронный I/O.</li>
+        <li>Официально поддерживает только gradle.</li>
+      </ul>
+    </section>
+
+    <section data-background-image="images/bit.ly_3WibkYn.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3>Клиенты для Python</h3>
+
+      <ul>
+        <li>Нет личного опыта.</li>
+        <li>У коллег были проблемы с производительностью, возможно связанные с большим (более 100&nbsp;кб)
+          размером GraphQL
+          схемы.
+        </li>
+        <li>Рекомендуем <a href="https://habr.com/ru/post/707374/" target="_blank">статью на Хабре</a> (см.
+          QR-код).
+        </li>
+      </ul>
     </section>
 
     <section>
