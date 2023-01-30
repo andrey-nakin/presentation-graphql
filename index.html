@@ -660,8 +660,8 @@
           <pre>
             <code data-trim data-noescape>
               query {
-                employees { id departmentId }
-                departments { id name } # Нельзя, другое API!
+                departments { id name }
+                employees { id departmentId }  # Нельзя, другое API!
               }
             </code>
           </pre>
@@ -685,8 +685,8 @@
           <pre>
             <code data-trim data-noescape>
               query {
-                employees { id departmentId }
-                departments { id name } # Можно!
+                departments { id name }
+                employees { id departmentId }  # Можно!
               }
             </code>
           </pre>
@@ -712,8 +712,8 @@
           <pre>
             <code data-trim data-noescape>
               query {
-                employees { id departmentId }
                 departments { id name }
+                employees { id departmentId }
               }
             </code>
           </pre>
@@ -722,12 +722,12 @@
           <pre>
             <code data-trim data-noescape>
               query {
-                employees {
+                departments {
                   id
-                  department { # Хочется получить
-                    id         # информацию об отделе
-                    name       # прямо «внутри» сотрудника
-                  }
+                  name
+                  employees { # Хочется получить
+                    id        # список сотрудников
+                  }           # прямо в отделе
                 }
               }
             </code>
@@ -740,7 +740,7 @@
       <h3>Добавим связь между сервисными модулями</h3>
 
       <img src="images/cd-with-link.png" style="zoom: 100%" alt="Диаграмма компонентов с доп. связью">
-      <p>Сервис сотрудников может обращаться непосредственно к&nbsp;сервису отделов.</p>
+      <p>Сервис отделов может обращаться непосредственно к&nbsp;сервису сотрудников.</p>
     </section>
 
     <section>
@@ -779,7 +779,7 @@
 
       <ul>
         <li>Добавляет сложность в проект.</li>
-        <li>Повышает требования к разработчиками.</li>
+        <li>Повышает требования к разработчикам.</li>
       </ul>
       <p><strong>Следствие:</strong> GraphQL может оказаться бесполезным для небольшого API с&nbsp;малым числом
         сценариев использования.</p>
