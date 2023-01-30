@@ -765,6 +765,73 @@
       <ul>
         <li>В SDL-схему добавляются специальные метаданные, декларирующие связь между элементами разных&nbsp;API.</li>
         <li>Сама связь реализуется в GraphQL-маршрутизаторе.</li>
+        <li>Модификация самих модулей минимальная.</li>
+      </ul>
+    </section>
+
+    <section data-background-image="images/bit.ly_3HH15c0.png" data-background-size="17%"
+             data-background-position="top right">
+      <h3><a href="https://www.apollographql.com/docs/federation/v1">Apollo API Federation v1</a></h3>
+
+      <ul>
+        <li>Вводятся специальные директивы: @key, @external и&nbsp;др.</li>
+        <li>SDL-схемы модифицируются, чтобы обозначить связь между типами API.</li>
+        <li>В модули добавяется поддержка federation-запросов (как правило, с помощью библиотеки).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Пример API Federation</h3>
+
+      <p>Модификация схемы сервиса отделов:</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Department @key(fields: "id") {
+            id:   ID!
+            name: String!
+          }
+        </code>
+      </pre>
+      <p>Директива <code>@key</code> определяет главный ключ сущности <code>Department</code>.</p>
+    </section>
+
+    <section>
+      <h3>Пример API Federation</h3>
+
+      <p>Модификация схемы сервиса сотрудников:</p>
+      <pre>
+        <code data-trim data-noescape>
+          type Employee @key(fields: "id") {
+            id:   ID!
+          }
+
+          extend type Department @key(fields: "id") {
+            id: ID! @external
+            employees: [Employee!]
+          }
+        </code>
+      </pre>
+      <p>Мы импортируем тип <code>Department</code> и добавляем в него новое поле <code>employees</code>.</p>
+    </section>
+
+    <section>
+      <h3>Интересный эффект</h3>
+
+      <ul>
+        <li>Сервис отделов <strong>не знает</strong>, что в его тип <code>Department</code> добавилось новое поле!</li>
+      </ul>
+
+      <p>Можно добавлять функциональность к legacy-сервисам без модификации последних.</p>
+    </section>
+
+    <section>
+      <h3>API Federation</h3>
+
+      <p>Даёт возможность по-новому организовать API вашего приложения:</p>
+      <ul>
+        <li>API реализуется небольшими сервисными модулями.</li>
+        <li>Добавляется разметка связей между API.</li>
+        <li>Все эти детали скрыты от клиента, который имеет дело с одним совокупным API.</li>
       </ul>
     </section>
 
