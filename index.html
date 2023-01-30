@@ -554,7 +554,7 @@
     <section>
       <h3>Метаданные в SDL</h3>
 
-      <p>Описание API может включать в себя метаданные посредством добавления в схему <i>директив</i>:</p>
+      <p>Схема может включать в себя метаданные посредством добавления в схему <i>директив</i>:</p>
       <pre>
         <code data-trim data-noescape>
           type Employee {
@@ -637,6 +637,69 @@
         </code>
       </pre>
       <p>Клиенты API должны отслеживать deprecation.</p>
+    </section>
+
+    <section>
+      <h3>GraphQL в&nbsp;многосервисных приложениях</h3>
+    </section>
+
+    <section>
+      <h3>Пример приложения</h3>
+
+      <img src="images/cd-without-router.png" style="zoom: 100%" alt="Диаграмма компонентов">
+      <p>Клиент и три модуля с&nbsp;GraphQL&nbsp;API.</p>
+    </section>
+
+    <section>
+      <h3>Проблемы</h3>
+
+      <ul>
+        <li>Клиент хранит ссылки на все компоненты и их&nbsp;SDL-схемы.</li>
+        <li>Невозможно комбинировать запросы к&nbsp;разным API в&nbsp;одном обращении к back-end:
+          <pre>
+            <code data-trim data-noescape>
+              query {
+                employees { id depId }
+                departments { id name } # Нельзя, другое API!
+              }
+            </code>
+          </pre>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Добавим маршрутизатор</h3>
+
+      <img src="images/cd-with-router.png" style="zoom: 100%" alt="Диаграмма компонентов с маршрутизатором">
+      <p>Маршрутизатор выступает как единая точка входа в&nbsp;API.</p>
+    </section>
+
+    <section>
+      <h3>Уже лучше</h3>
+
+      <ul>
+        <li>Клиент хранит только ссылку на маршрутизатор и совокупную SDL-схему.</li>
+        <li>Теперь можно комбинировать запросы к&nbsp;разным API в&nbsp;одном обращении к back-end:
+          <pre>
+            <code data-trim data-noescape>
+              query {
+                employees { id depId }
+                departments { id name } # Можно!
+              }
+            </code>
+          </pre>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>GraphQL-маршрутизатор</h3>
+
+      <ul>
+        <li>Специализированное ПО, способное производить разбор GraphQL-запросов (обычный nginx не годится).</li>
+        <li>Не должен вносить заметную задержку в запрос к&nbsp;back-end.</li>
+      </ul>
     </section>
 
     <section>
