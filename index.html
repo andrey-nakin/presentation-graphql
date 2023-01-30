@@ -402,7 +402,7 @@
           query {
             employee(id: "emp-1") {
               id
-              depId
+              departmentId
             }
             department(id: "dep-1") {
               name
@@ -654,12 +654,13 @@
       <h3>Проблемы</h3>
 
       <ul>
-        <li>Клиент хранит ссылки на все компоненты и их&nbsp;SDL-схемы.</li>
+        <li>Клиент хранит ссылки на все компоненты и их&nbsp;SDL-схемы и выбирает нужные в каждом отдельном запросе.
+        </li>
         <li>Невозможно комбинировать запросы к&nbsp;разным API в&nbsp;одном обращении к back-end:
           <pre>
             <code data-trim data-noescape>
               query {
-                employees { id depId }
+                employees { id departmentId }
                 departments { id name } # Нельзя, другое API!
               }
             </code>
@@ -684,7 +685,7 @@
           <pre>
             <code data-trim data-noescape>
               query {
-                employees { id depId }
+                employees { id departmentId }
                 departments { id name } # Можно!
               }
             </code>
@@ -698,7 +699,72 @@
 
       <ul>
         <li>Специализированное ПО, способное производить разбор GraphQL-запросов (обычный nginx не годится).</li>
+        <li>Отправляет запросы нужным сервисам и объединяет их результаты в одно целое.</li>
         <li>Не должен вносить заметную задержку в запрос к&nbsp;back-end.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Всё ещё есть проблемы</h3>
+
+      <ul>
+        <li>Так плохо, нет интеграции между API:
+          <pre>
+            <code data-trim data-noescape>
+              query {
+                employees { id departmentId }
+                departments { id name }
+              }
+            </code>
+          </pre>
+        </li>
+        <li>А вот так хорошо:
+          <pre>
+            <code data-trim data-noescape>
+              query {
+                employees {
+                  id
+                  department { # Хочется получить
+                    id         # информацию об отделе
+                    name       # прямо «внутри» сотрудника
+                  }
+                }
+              }
+            </code>
+          </pre>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Добавим связь между сервисными модулями</h3>
+
+      <img src="images/cd-with-link.png" style="zoom: 100%" alt="Диаграмма компонентов с доп. связью">
+      <p>Сервис сотрудников может обращаться непосредственно к&nbsp;сервису отделов.</p>
+    </section>
+
+    <section>
+      <h3>Снова проблемы</h3>
+
+      <ul>
+        <li>Увеличивается связность между модулями и их зависимость друг от друга.</li>
+        <li>Увеличивается сложность модулей, в них появляется GraphQL-клиент и логика композиции данных.</li>
+      </ul>
+      <p>Есть ли общее решение?.</p>
+    </section>
+
+    <section>
+      <h3>API Federation</h3>
+
+      <p>Интеграция нескольких поставщиков API.</p>
+    </section>
+
+    <section>
+      <h3>GraphQL API Federation</h3>
+
+      <ul>
+        <li>В SDL-схему добавляются специальные метаданные, декларирующие связь между элементами разных&nbsp;API.</li>
+        <li>Сама связь реализуется в GraphQL-маршрутизаторе.</li>
       </ul>
     </section>
 
