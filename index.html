@@ -759,24 +759,15 @@
       <p>Интеграция нескольких поставщиков API.</p>
     </section>
 
-    <section>
-      <h3>GraphQL API Federation</h3>
-
-      <ul>
-        <li>В SDL-схему добавляются специальные метаданные, декларирующие связь между элементами разных&nbsp;API.</li>
-        <li>Сама связь реализуется в GraphQL-маршрутизаторе.</li>
-        <li>Модификация самих модулей минимальная.</li>
-      </ul>
-    </section>
-
     <section data-background-image="images/bit.ly_3HH15c0.png" data-background-size="17%"
              data-background-position="top right">
       <h3><a href="https://www.apollographql.com/docs/federation/v1">Apollo API Federation v1</a></h3>
 
       <ul>
-        <li>Вводятся специальные директивы: @key, @external и&nbsp;др.</li>
-        <li>SDL-схемы модифицируются, чтобы обозначить связь между типами API.</li>
-        <li>В модули добавяется поддержка federation-запросов (как правило, с помощью библиотеки).</li>
+        <li>Вводятся специальные SDL директивы: @key, @external и&nbsp;др.</li>
+        <li>SDL-схемы сервисов модифицируются, чтобы обозначить связь между API.</li>
+        <li>В сервисы добавляется поддержка federation-запросов (как правило, с помощью библиотеки).</li>
+        <li>Сама связь реализуется в GraphQL-маршрутизаторе.</li>
       </ul>
     </section>
 
