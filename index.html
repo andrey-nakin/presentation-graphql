@@ -805,7 +805,7 @@
             id:   ID!
           }
 
-          extend type Department @key(fields: "id") {
+          type Department @key(fields: "id") {
             id: ID! @external
             employees: [Employee!]
           }
