@@ -212,8 +212,8 @@
           GET employees/emp-1?have-dep=true&have-dep-branch=true
 
           {
-            "id":       "emp-1",
-            "dep":      {
+            "id":         "emp-1",
+            "department": {
               "dep_id": "dep-1",
               "name":   "Консалтинг",
               "branch": {
@@ -255,8 +255,8 @@
             &have-name=false&have-photo=false&have-dep-name=false
 
           {
-            "id":       "emp-1",
-            "dep":      {
+            "id":         "emp-1",
+            "department": {
               "dep_id": "dep-1",
               "branch": {
                 "id":   "br-1",
@@ -336,7 +336,7 @@
                 query {
                   employee(id: "emp-1") {
                     id
-                    dep {
+                    department {
                       branch {
                         name
                       }
@@ -350,8 +350,8 @@
             <pre class="long-code">
               <code data-trim data-noescape>
                 {
-                  "id":  "emp-1",
-                  "dep": {
+                  "id":         "emp-1",
+                  "department": {
                     "branch": {
                       "name": "Московский"
                     }
@@ -424,6 +424,15 @@
     </section>
 
     <section>
+      <h3>Промежуточный итог</h3>
+
+      <ul>
+        <li>Для клиента &mdash; существенное обогащение API.</li>
+        <li>Для back-end &mdash; примерно тот же уровень трудозатрат, что в простом нормализованном RESTful API.</li>
+      </ul>
+    </section>
+
+    <section>
       <h3>GraphQL и системный анализ</h3>
 
       <p>Проектирование API тоже упростилось.</p>
@@ -431,7 +440,8 @@
       <ul>
         <li>Проектировщик объявляет типы объектов и связи между ними.</li>
         <li>Комбинирование объектов в запросе &mdash; забота клиента API.</li>
-        <li>Это касается только выборки данных! Изменение данных на сервере не сильно изменилось по сравнению, например, с
+        <li>Это касается только выборки данных! Изменение данных на сервере не сильно изменилось по сравнению, например,
+          с
           JSON-RPC.
         </li>
       </ul>
